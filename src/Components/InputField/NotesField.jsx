@@ -1,5 +1,4 @@
 import React from "react";
-import { NotesCard } from "../NotesCard/NotesCard";
 import "./NotesField.css";
 const NotesField = () => {
   return (
@@ -10,7 +9,6 @@ const NotesField = () => {
             <input
               type="text"
               name="title"
-              id=""
               className="notes-field-title"
               placeholder="Title"
             />
