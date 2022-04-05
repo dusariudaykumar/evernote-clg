@@ -7,22 +7,26 @@ const SideNav = () => {
       <ul className="side-nav-list flex-col">
         <li>
           <Link to="/">
-            <span class="material-icons-outlined side-nav-icon ">home</span>
+            <span className="material-icons-outlined side-nav-icon ">home</span>
           </Link>
         </li>
         <li>
           <Link to="/">
-            <span class="material-icons-outlined side-nav-icon">label</span>
+            <span className="material-icons-outlined side-nav-icon">label</span>
           </Link>
         </li>
         <li>
           <Link to="/">
-            <span class="material-icons-outlined side-nav-icon">archive</span>
+            <span className="material-icons-outlined side-nav-icon">
+              archive
+            </span>
           </Link>
         </li>
         <li>
           <Link to="/">
-            <span class="material-icons-outlined side-nav-icon">delete</span>
+            <span className="material-icons-outlined side-nav-icon">
+              delete
+            </span>
           </Link>
         </li>
         <li>
