@@ -37,7 +37,7 @@
 .add-note-btn {
   outline: none;
   border: none;
-  background-color: var(--primary-color);
+  background-color: var(--dark-primary-color);
   color: var(--white);
   padding: 2px 3px;
   border-radius: 3px;
