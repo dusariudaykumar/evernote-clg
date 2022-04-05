@@ -6,7 +6,7 @@ const LandingPage = () => {
   return (
     <div className="landing-page-wrapper flex">
       <div className="hero-container">
-        <img className="hero-img" src={heroImg} alt="landing-Page" />
+        <img className="hero-img" src={heroImg} alt="landingPage" />
       </div>
       <div className="landing-page-container flex-col">
         <h4 className="hero-text">
