@@ -1,0 +1,17 @@
+.navigation-bar {
+  border-radius: 0;
+  border: 0;
+  height: 10vh;
+  background-color: var(--white);
+}
+.nav-left-wrapper {
+  align-items: center;
+}
+.hide-content {
+  display: none;
+}
+@media only screen and (max-width: 650px) {
+  .hide-content {
+    display: flex;
+  }
+}
