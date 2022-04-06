@@ -1,0 +1,50 @@
+.form-container {
+  align-items: center;
+  box-shadow: var(--login-box-shadow);
+}
+.login-wrapper {
+  max-width: 25rem;
+  margin: 4rem auto;
+}
+.login-heading {
+  text-align: center;
+  margin-top: 1rem;
+}
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 4rem;
+}
+.input-container {
+  justify-items: start;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.sample-input-email:focus,
+.sample-input-pwd:focus {
+  box-shadow: 0 0 5px var(--dark-primary-color) inset;
+}
+.btn-outline {
+  width: 100%;
+  text-transform: capitalize;
+  border: 2px solid var(--dark-primary-color);
+}
+.btn-outline:hover {
+  background-color: var(--dark-primary-color);
+}
+.btn-solid {
+  background-color: var(--dark-primary-color);
+  width: 100%;
+  text-transform: capitalize;
+}
+
+.login-link,
+.sign-up {
+  margin-bottom: 2rem;
+  align-items: center;
+}
+.flex-align-item-center {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
