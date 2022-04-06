@@ -6,6 +6,7 @@ import "./Login.css";
 
 const Login = () => {
   // initial data of the useState
+
   const initialLoginData = {
     email: "",
     password: "",
