@@ -15,10 +15,9 @@ const LandingPage = () => {
         <p className="hero-description">
           Take notes the simple way for free. Forever
         </p>
-        <button className="btn btn-solid landing-btn ">Start Now</button>
-        <p className="login-link">
-          Already have an account?<Link to="/">Login</Link>
-        </p>
+        <Link to="/login">
+          <button className="btn  landing-btn ">Start Now</button>
+        </Link>
       </div>
     </div>
   );
