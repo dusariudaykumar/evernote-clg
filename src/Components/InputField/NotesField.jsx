@@ -12,7 +12,7 @@ const NotesField = () => {
               className="notes-field-title"
               placeholder="Title"
             />
-            <span class="material-icons-outlined">push_pin</span>
+            <span className="material-icons-outlined">push_pin</span>
           </div>
           <div className="notes-body-container">
             <textarea className="notes-body" placeholder="Notes....." />
