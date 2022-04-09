@@ -1,34 +1,32 @@
-.note-card {
-  width: 35rem;
-  min-height: 11rem;
-  background-color: var(--white);
-  border-radius: 10px;
-  margin-left: 6rem;
-  margin-bottom: 2rem;
+.card-outer-container {
+  max-width: 30rem;
+  margin: 10px;
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--font-color);
 }
-
-.notecard-icons span {
-  font-size: 2rem;
-  padding: 4px;
-  cursor: pointer;
+.card-inner-container {
+  justify-content: center;
+  gap: 1rem;
 }
-.notecard-icons {
+.card-title h3 {
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  font-weight: 550;
+}
+.card-description {
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+.card-btns {
   justify-content: end;
+  gap: 10px;
 }
-.notecard-header {
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  margin-inline: 10px;
-}
-.notecard-header h2 {
-  padding: 0;
-  margin: 0;
-}
-.notecard-header span {
+.card-btns span {
   cursor: pointer;
+  color: var(--light-secondary-color);
 }
-.notecard-body {
-  padding: 10px;
-  margin: 1rem;
+.card-btns span:hover {
+  color: var(--font-color);
 }

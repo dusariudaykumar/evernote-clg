@@ -1,17 +1,14 @@
-.sign-wrapper {
-  max-width: 25rem;
-  margin: 4rem auto;
-}
-.form-wrapper {
-  justify-content: center;
-  align-items: center;
-}
-.form-container {
-  align-items: center;
-  box-shadow: var(--login-box-shadow);
+.signup-box {
+  height: 100vh;
+  margin: 3rem;
 }
 
-.login-heading {
+.form-container {
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-heading {
   text-align: center;
   margin-top: 1rem;
 }
@@ -36,7 +33,7 @@
 }
 
 .btn-solid {
-  background-color: var(--dark-primary-color);
+  background-color: var(--black);
   width: 100%;
   text-transform: capitalize;
 }
