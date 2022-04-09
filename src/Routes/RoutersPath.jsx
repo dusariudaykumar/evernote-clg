@@ -6,8 +6,6 @@ import { Homepage, LandingPage, Login, SignUp } from "../Pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 const RoutersPath = () => {
-  const { authState } = useAuth();
-  console.log(authState);
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
