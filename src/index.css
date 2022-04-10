@@ -2,6 +2,7 @@
   --dark-primary-color: #050c21;
   --dark-secondary-color: #ffffff;
   --background-color: #f7f7f7;
+  --login-box-shadow: #0000001a 0px 4px 12px;
 }
 body {
   background-color: var(--background-color);

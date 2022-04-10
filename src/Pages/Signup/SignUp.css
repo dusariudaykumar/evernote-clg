@@ -1,0 +1,52 @@
+.sign-wrapper {
+  max-width: 25rem;
+  margin: 4rem auto;
+}
+.form-wrapper {
+  justify-content: center;
+  align-items: center;
+}
+.form-container {
+  align-items: center;
+  box-shadow: var(--login-box-shadow);
+}
+
+.login-heading {
+  text-align: center;
+  margin-top: 1rem;
+}
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 4rem;
+}
+.input-container {
+  justify-items: start;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.signup-labels {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.3rem;
+}
+.sample-input-email:focus,
+.sample-input-pwd:focus {
+  box-shadow: 0 0 5px var(--logo-color) inset;
+}
+
+.btn-solid {
+  background-color: var(--dark-primary-color);
+  width: 100%;
+  text-transform: capitalize;
+}
+
+.sign-up {
+  margin-bottom: 2rem;
+  align-items: center;
+}
+.flex-align-item-center {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
