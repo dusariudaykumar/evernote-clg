@@ -1,10 +1,16 @@
 .form-container {
   align-items: center;
-  box-shadow: var(--login-box-shadow);
+  box-shadow: var(--box-shadow);
+
+  color: var(--font-color);
+  background-color: var(--dark-bg);
 }
 .login-wrapper {
-  max-width: 25rem;
-  margin: 4rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 85vh;
 }
 .login-heading {
   text-align: center;
@@ -20,24 +26,33 @@
   align-items: flex-start;
   gap: 1rem;
 }
+.sample-input-email,
+.sample-input-pwd {
+  background-color: var(--primary-color);
+  color: var(--font-color);
+}
 .sample-input-email:focus,
 .sample-input-pwd:focus {
-  box-shadow: 0 0 5px var(--dark-primary-color) inset;
+  box-shadow: 0 0 5px var(--border-color) inset;
 }
 .btn-outline {
   width: 100%;
+  color: var(--font-color);
   text-transform: capitalize;
-  border: 2px solid var(--dark-primary-color);
+  border: 2px solid var(--add-btn-color);
 }
 .btn-outline:hover {
-  background-color: var(--dark-primary-color);
+  background-color: var(--add-btn-color);
+  color: var(--font-color);
 }
 .btn-solid {
-  background-color: var(--dark-primary-color);
   width: 100%;
   text-transform: capitalize;
+  background-color: var(--add-btn-color) !important;
 }
-
+.login-btn {
+  /* background-color: var(--black) !important; */
+}
 .login-link,
 .sign-up {
   margin-bottom: 2rem;

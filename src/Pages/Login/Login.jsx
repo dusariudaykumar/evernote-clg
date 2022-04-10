@@ -90,7 +90,7 @@ const Login = () => {
               <Link to="/">Forgot Password</Link>
             </span>
           </div>
-          <button onClick={loginHandler} className="btn btn-solid">
+          <button onClick={loginHandler} className="btn btn-solid login-btn">
             Login
           </button>
           <button onClick={testHandler} className="btn btn-outline ">

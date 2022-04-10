@@ -47,7 +47,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="sign-wrapper ">
+    <div className="login-wrapper signup-box ">
       <form className="flex-col form-container" onSubmit={formDataClickHandler}>
         <h5 className="signup-heading">SignUp</h5>
         <div className="input-container flex-col">
