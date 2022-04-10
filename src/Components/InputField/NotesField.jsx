@@ -16,7 +16,7 @@ const NotesField = ({ notes, setNotes, addNoteHandler, updatehandler }) => {
   const expandHandler = () => {
     setIsExpanded(true);
   };
-  //onClick={(e) => updatehandler(e, notes)}
+
   return (
     <>
       <form
