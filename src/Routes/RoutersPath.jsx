@@ -1,7 +1,6 @@
 import Mockman from "mockman-js";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { useAuth } from "../contexts";
 import { Homepage, LandingPage, Login, SignUp } from "../Pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 
