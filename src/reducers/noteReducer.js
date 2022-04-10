@@ -19,6 +19,12 @@ export const noteReducer = (state, action) => {
         notes: action.payload,
         editNote: false,
       };
+    case "DELETE_NOTE":
+      return {
+        ...state,
+        notes: action.payload,
+      };
+
     default:
       return {
         ...state,

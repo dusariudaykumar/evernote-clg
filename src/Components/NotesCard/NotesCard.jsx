@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./NotesCard.css";
-const NotesCard = ({ notes, editHandler }) => {
+const NotesCard = ({ notes, editHandler, deleteNoteHandler }) => {
   const { notesTitle, notesBody, _id } = notes;
   const [showIcons, setShowIcons] = useState(false);
   return (
@@ -24,7 +24,11 @@ const NotesCard = ({ notes, editHandler }) => {
             </span>
             <span className="material-icons">palette</span>
             <span className="material-icons">label</span>
-            <span className="material-icons">delete</span>
+            <span
+              className="material-icons"
+              onClick={() => deleteNoteHandler(_id)}>
+              delete
+            </span>
             <span className="material-icons">archive</span>
           </div>
         )}
