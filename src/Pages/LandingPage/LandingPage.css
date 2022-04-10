@@ -1,4 +1,5 @@
 .landing-page-wrapper {
+  background-color: var(--white);
   margin: 1rem;
   display: grid;
   grid-template-columns: 50% 50%;
@@ -7,6 +8,7 @@
   align-items: center;
   flex-wrap: wrap;
   height: 100vh;
+  width: 100vw;
 }
 .hero-container {
   grid-area: "image-container";

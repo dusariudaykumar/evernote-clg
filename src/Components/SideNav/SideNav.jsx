@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts/auth-context";
 import "./SideNav.css";
 const SideNav = ({ setIsnoteInputVisible }) => {
+  const {
+    authState: { userData },
+  } = useAuth();
+
   return (
     <div className="side-nav flex-col">
       <ul className="nav-items">
@@ -49,7 +54,9 @@ const SideNav = ({ setIsnoteInputVisible }) => {
         </li>
       </ul>
       <div className="logout-container flex">
-        <div className="user-name">Uday Kumar</div>
+        <div className="user-name">
+          {userData.firstName + " " + userData.lastName}
+        </div>
         <span className="material-icons side-nav-icon">logout</span>
       </div>
     </div>

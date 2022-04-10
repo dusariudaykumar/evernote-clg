@@ -1,8 +1,9 @@
 .form-container {
   align-items: center;
   box-shadow: var(--box-shadow);
-  border: 1px solid var(--border-color);
+
   color: var(--font-color);
+  background-color: var(--dark-bg);
 }
 .login-wrapper {
   display: flex;
@@ -38,16 +39,16 @@
   width: 100%;
   color: var(--font-color);
   text-transform: capitalize;
-  border: 2px solid var(--black);
+  border: 2px solid var(--add-btn-color);
 }
 .btn-outline:hover {
-  background-color: var(--secondary-color);
-  color: var(--black);
+  background-color: var(--add-btn-color);
+  color: var(--font-color);
 }
 .btn-solid {
   width: 100%;
   text-transform: capitalize;
-  background-color: var(--black);
+  background-color: var(--add-btn-color) !important;
 }
 .login-btn {
   /* background-color: var(--black) !important; */

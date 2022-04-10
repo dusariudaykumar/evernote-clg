@@ -4,13 +4,13 @@
   background-color: var(--primary-color);
   padding-right: 5px;
   justify-content: space-between;
-  min-height: 90vh;
+  min-height: 100vh;
   width: 16rem;
   box-shadow: var(--box-shadow);
 }
 .nav-icon-container {
   color: var(--light-secondary-color);
-  gap: 1rem;
+  gap: 2rem;
   align-items: center;
   margin: 1rem;
   font-size: 1.1rem;
@@ -22,8 +22,8 @@
   color: var(--font-color);
 }
 .nav-pill {
-  border-top-right-radius: 1rem;
-  border-bottom-right-radius: 1rem;
+  border-top-right-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
 }
 .nav-pill:hover {
   background-color: var(--hover-color);

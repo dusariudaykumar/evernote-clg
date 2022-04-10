@@ -8,9 +8,9 @@ function App() {
     <div className="App">
       <div className="main-wrapper">
         {location.pathname !== "/" && <NavBar />}
-        {location.pathname !== "/login" && location.pathname !== "/signup" && (
-          <SideNav />
-        )}
+        {location.pathname !== "/login" &&
+          location.pathname !== "/signup" &&
+          location.pathname !== "/" && <SideNav />}
         <RoutersPath />
       </div>
     </div>
