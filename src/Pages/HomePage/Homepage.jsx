@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-import { NotesCard, NotesField, SideNav } from "../../Components";
+import { NotesCard, NotesField } from "../../Components";
 import { useAuth } from "../../contexts";
 import { useNotes } from "../../contexts/notes-context";
 import "./Homepage.css";

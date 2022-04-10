@@ -19,5 +19,9 @@ export const noteReducer = (state, action) => {
         notes: action.payload,
         editNote: false,
       };
+    default:
+      return {
+        ...state,
+      };
   }
 };
