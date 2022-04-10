@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useNotes } from "../../contexts/notes-context";
 import "./NotesField.css";
-const NotesField = ({ notes, setNotes, addNoteHandler }) => {
+const NotesField = ({ notes, setNotes, addNoteHandler, updatehandler }) => {
+  const {
+    noteState: { editNote },
+  } = useNotes();
   const changeHandler = (event) => {
     const { name, value } = event.target;
     setNotes((prev) => ({
@@ -12,11 +16,16 @@ const NotesField = ({ notes, setNotes, addNoteHandler }) => {
   const expandHandler = () => {
     setIsExpanded(true);
   };
+  //onClick={(e) => updatehandler(e, notes)}
   return (
     <>
       <form
         className="notes-field-wrapper "
-        onSubmit={(event) => addNoteHandler(event, notes)}>
+        onSubmit={
+          !editNote
+            ? (event) => addNoteHandler(event, notes)
+            : (e) => updatehandler(e, notes)
+        }>
         <div className="input-fields flex-col">
           {isExpanded && (
             <div className="title-container flex">
@@ -25,6 +34,7 @@ const NotesField = ({ notes, setNotes, addNoteHandler }) => {
                 name="notesTitle"
                 className="notes-field-title"
                 placeholder="Title"
+                value={notes.notesTitle}
                 onChange={changeHandler}
               />
               <span className="material-icons-outlined">push_pin</span>
@@ -36,6 +46,7 @@ const NotesField = ({ notes, setNotes, addNoteHandler }) => {
               name="notesBody"
               placeholder="Notes....."
               rows={isExpanded ? 3 : 1}
+              value={notes.notesBody}
               onClick={expandHandler}
               onChange={changeHandler}
             />
@@ -43,8 +54,11 @@ const NotesField = ({ notes, setNotes, addNoteHandler }) => {
           {isExpanded && (
             <div className="flex notes-action">
               <button className="add-note-btn" type="submit">
-                <span className="material-icons-outlined">add</span>
+                <span className="material-icons-outlined">
+                  {!editNote ? "add" : "done"}
+                </span>
               </button>
+
               <div className="notes-action-btn-wrapper">
                 <span className="material-icons">palette</span>
                 <span className="material-icons">label</span>
