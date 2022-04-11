@@ -1,7 +1,6 @@
 .form-container {
   align-items: center;
   box-shadow: var(--box-shadow);
-
   color: var(--font-color);
   background-color: var(--dark-bg);
 }
@@ -50,9 +49,7 @@
   text-transform: capitalize;
   background-color: var(--add-btn-color) !important;
 }
-.login-btn {
-  /* background-color: var(--black) !important; */
-}
+
 .login-link,
 .sign-up {
   margin-bottom: 2rem;

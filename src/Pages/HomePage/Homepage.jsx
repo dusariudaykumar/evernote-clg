@@ -1,9 +1,12 @@
-import axios from "axios";
 import React, { useState } from "react";
-
 import { NotesCard, NotesField } from "../../Components";
 import { useAuth } from "../../contexts";
 import { useNotes } from "../../contexts/notes-context";
+import {
+  addNotesService,
+  deleteNotesService,
+  editNotesService,
+} from "../../services";
 import "./Homepage.css";
 const initialNotes = {
   notesTitle: "",
@@ -18,25 +21,12 @@ const Homepage = () => {
 
   const addNoteHandler = async (event, note) => {
     event.preventDefault();
-    try {
-      const response = await axios.post(
-        "/api/notes",
-        { note },
-        {
-          headers: {
-            authorization: encodedToken,
-          },
-        }
-      );
-
-      noteDispatch({
-        type: "ADD_NOTE",
-        payload: response.data.notes,
-      });
-      setNotes(initialNotes);
-    } catch (error) {
-      console.log(error.message);
-    }
+    const response = await addNotesService(note, encodedToken);
+    noteDispatch({
+      type: "ADD_NOTE",
+      payload: response.data.notes,
+    });
+    setNotes(initialNotes);
   };
   const editHandler = (noteedit) => {
     setNotes({
@@ -50,27 +40,21 @@ const Homepage = () => {
 
   const updatehandler = async (e, editnotes) => {
     e.preventDefault();
-    console.log(editnotes);
-    try {
-      const resp = await axios.post(
-        `/api/notes/${editnotes._id}`,
-        { note: editnotes },
-        {
-          headers: {
-            authorization: encodedToken,
-          },
-        }
-      );
-      noteDispatch({
-        type: "UPDATE_NOTE",
-        payload: resp.data.notes,
-      });
-      setNotes(initialNotes);
-    } catch (error) {
-      console.log(error.message);
-    }
+    const resp = await editNotesService(editnotes, encodedToken);
+    noteDispatch({
+      type: "UPDATE_NOTE",
+      payload: resp.data.notes,
+    });
+    setNotes(initialNotes);
   };
-
+  const deleteNoteHandler = async (notesId) => {
+    const resp = await deleteNotesService(notesId, encodedToken);
+    console.log(resp);
+    noteDispatch({
+      type: "DELETE_NOTE",
+      payload: resp.data.notes,
+    });
+  };
   return (
     <div className="home-page-wrapper">
       <NotesField
@@ -81,7 +65,12 @@ const Homepage = () => {
       />
       <div className=" notecard-container ">
         {noteState.notes.map((item) => (
-          <NotesCard key={item._id} notes={item} editHandler={editHandler} />
+          <NotesCard
+            key={item._id}
+            notes={item}
+            editHandler={editHandler}
+            deleteNoteHandler={deleteNoteHandler}
+          />
         ))}
       </div>
     </div>

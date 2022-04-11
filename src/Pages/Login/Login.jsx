@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/index";
 import "./Login.css";
 
@@ -48,13 +49,14 @@ const Login = () => {
         });
         localStorage.setItem("token", encodedToken);
         localStorage.setItem("userData", JSON.stringify(userData));
+        toast.success("Login successful!");
         navigate("/home");
       } else {
         navigate("/login");
       }
       setLoginData(initialLoginData); // clearing the input field
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.errors[0]);
     }
   };
 

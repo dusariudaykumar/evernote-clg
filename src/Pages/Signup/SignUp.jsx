@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/auth-context";
 import "./SignUp.css";
 const SignUp = () => {
+  const navigate = useNavigate();
   const { authDispatch } = useAuth();
   const initailSingUpData = {
     firstName: "",
@@ -33,16 +35,17 @@ const SignUp = () => {
       const { encodedToken, createdUser } = authSignUpResponse.data;
       if (encodedToken) {
         authDispatch({
-          type: "LOGIN_SUCCESS",
+          type: "SIGNUP_SUCCESS",
           payload: { createdUser, encodedToken },
         });
       }
       localStorage.setItem("token", encodedToken);
       localStorage.setItem("userData", JSON.stringify(createdUser));
-      console.log(authSignUpResponse);
+      toast.success("Account created successfuly!");
+      navigate("/home");
       setSignUpData(initailSingUpData);
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.errors[0]);
     }
   };
 
