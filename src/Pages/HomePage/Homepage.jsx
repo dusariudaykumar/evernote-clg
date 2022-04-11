@@ -3,6 +3,7 @@ import { NotesCard, NotesField } from "../../Components";
 import { useAuth } from "../../contexts";
 import { useNotes } from "../../contexts/notes-context";
 import {
+  addArchiveService,
   addNotesService,
   deleteNotesService,
   editNotesService,
@@ -19,15 +20,6 @@ const Homepage = () => {
   const { noteState, noteDispatch } = useNotes();
   const [notes, setNotes] = useState(initialNotes);
 
-  const addNoteHandler = async (event, note) => {
-    event.preventDefault();
-    const response = await addNotesService(note, encodedToken);
-    noteDispatch({
-      type: "ADD_NOTE",
-      payload: response.data.notes,
-    });
-    setNotes(initialNotes);
-  };
   const editHandler = (noteedit) => {
     setNotes({
       ...notes,
@@ -36,6 +28,15 @@ const Homepage = () => {
       notesBody: noteedit.notesBody,
     });
     noteDispatch({ type: "EDIT_NOTE" });
+  };
+  const addNoteHandler = async (event, note) => {
+    event.preventDefault();
+    const response = await addNotesService(note, encodedToken);
+    noteDispatch({
+      type: "ADD_NOTE",
+      payload: response.data.notes,
+    });
+    setNotes(initialNotes);
   };
 
   const updatehandler = async (e, editnotes) => {
@@ -49,12 +50,16 @@ const Homepage = () => {
   };
   const deleteNoteHandler = async (notesId) => {
     const resp = await deleteNotesService(notesId, encodedToken);
-    console.log(resp);
     noteDispatch({
       type: "DELETE_NOTE",
       payload: resp.data.notes,
     });
   };
+  const addArchiveHandler = async (note) => {
+    const response = await addArchiveService(note, encodedToken);
+    noteDispatch({ type: "ADD_ARCHIVE", payload: response.data });
+  };
+
   return (
     <div className="home-page-wrapper">
       <NotesField
@@ -70,6 +75,7 @@ const Homepage = () => {
             notes={item}
             editHandler={editHandler}
             deleteNoteHandler={deleteNoteHandler}
+            addArchiveHandler={addArchiveHandler}
           />
         ))}
       </div>
