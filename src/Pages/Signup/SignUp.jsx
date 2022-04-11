@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/auth-context";
 import "./SignUp.css";
 const SignUp = () => {
@@ -40,10 +41,11 @@ const SignUp = () => {
       }
       localStorage.setItem("token", encodedToken);
       localStorage.setItem("userData", JSON.stringify(createdUser));
+      toast.success("Account created successfuly!");
       navigate("/home");
       setSignUpData(initailSingUpData);
     } catch (error) {
-      console.log(error.message);
+      toast.error(error.response.data.errors[0]);
     }
   };
 
