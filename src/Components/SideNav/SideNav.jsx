@@ -33,7 +33,7 @@ const SideNav = ({ setIsnoteInputVisible }) => {
           </Link>
         </li>
         <li className="nav-pill">
-          <Link to="/home" className="nav-link">
+          <Link to="/archive" className="nav-link">
             <div className="flex nav-icon-container">
               <span className="material-icons-outlined side-nav-icon">
                 archive
