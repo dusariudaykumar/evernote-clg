@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 export const editNotesService = async (editnotes, encodedToken) => {
   try {
     const resp = await axios.post(
@@ -10,8 +11,9 @@ export const editNotesService = async (editnotes, encodedToken) => {
         },
       }
     );
+    toast.info("Edited Notes");
     return resp;
   } catch (error) {
-    console.log(error.message);
+    toast.error(error.response.data.errors[0]);
   }
 };
