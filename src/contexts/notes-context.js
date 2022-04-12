@@ -4,6 +4,7 @@ import { noteReducer } from "../reducers/noteReducer";
 const initialState = {
   notes: [],
   editNote: false,
+  archive: [],
 };
 const NotesContext = createContext();
 const NotesProvider = ({ children }) => {

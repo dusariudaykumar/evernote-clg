@@ -1,0 +1,10 @@
+.archive-wrapper {
+  max-width: 100%;
+  margin: 1rem auto;
+  flex-wrap: wrap;
+}
+.archive-text {
+  color: var(--light-secondary-color);
+  letter-spacing: 0.2px;
+  text-align: center;
+}

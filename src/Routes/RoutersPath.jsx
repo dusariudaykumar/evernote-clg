@@ -1,8 +1,7 @@
 import Mockman from "mockman-js";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { Homepage, LandingPage, Login, SignUp } from "../Pages";
-import { Archive } from "../Pages/ArchivePage/Archive";
+import { ArchivePage, Homepage, LandingPage, Login, SignUp } from "../Pages";
 import { ProtectedRoute } from "./ProtectedRoute";
 
 const RoutersPath = () => {
@@ -14,7 +13,7 @@ const RoutersPath = () => {
       <Route path="/mockman" element={<Mockman />} />
       <Route element={<ProtectedRoute />}>
         <Route path="/home" element={<Homepage />} />
-        <Route path="/archive" element={<Archive />} />
+        <Route path="/archive" element={<ArchivePage />} />
       </Route>
     </Routes>
   );

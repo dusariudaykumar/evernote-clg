@@ -1,6 +1,14 @@
 import { useState } from "react";
 import "./NotesCard.css";
-const NotesCard = ({ notes, editHandler, deleteNoteHandler }) => {
+const NotesCard = ({
+  notes,
+  editHandler,
+  deleteNoteHandler,
+  addArchiveHandler,
+  path,
+  unArchiveHandler,
+  archiveDeleteHandler,
+}) => {
   const { notesTitle, notesBody, _id } = notes;
   const [showIcons, setShowIcons] = useState(false);
   return (
@@ -24,12 +32,30 @@ const NotesCard = ({ notes, editHandler, deleteNoteHandler }) => {
             </span>
             <span className="material-icons">palette</span>
             <span className="material-icons">label</span>
+
             <span
               className="material-icons"
-              onClick={() => deleteNoteHandler(_id)}>
+              onClick={
+                path !== "/archive"
+                  ? () => deleteNoteHandler(_id)
+                  : () => archiveDeleteHandler(_id)
+              }>
               delete
             </span>
-            <span className="material-icons">archive</span>
+
+            {path !== "/archive" ? (
+              <span
+                className="material-icons"
+                onClick={() => addArchiveHandler(notes)}>
+                archive
+              </span>
+            ) : (
+              <span
+                className="material-icons"
+                onClick={() => unArchiveHandler(notes)}>
+                unarchive
+              </span>
+            )}
           </div>
         )}
       </div>
