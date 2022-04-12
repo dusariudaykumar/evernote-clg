@@ -69,6 +69,11 @@
   border-radius: 50%;
   background-color: var(--add-btn-color);
 }
+.notes-action-btn-wrapper {
+  width: 100%;
+  align-items: center;
+  gap: 9px;
+}
 
 .notes-action-btn-wrapper span {
   font-size: 2rem;
@@ -77,4 +82,16 @@
 }
 .notes-action-btn-wrapper span:hover {
   color: var(--font-color);
+}
+.color-palette {
+  position: absolute;
+  left: 3rem;
+  bottom: 5px;
+
+  background-color: var(--primary-color);
+  padding: 5px;
+  display: inline-flex;
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
 }

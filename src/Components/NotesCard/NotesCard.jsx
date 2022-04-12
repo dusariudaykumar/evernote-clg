@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import "./NotesCard.css";
 const NotesCard = ({
   notes,
@@ -9,10 +10,12 @@ const NotesCard = ({
   unArchiveHandler,
   archiveDeleteHandler,
 }) => {
-  const { notesTitle, notesBody, _id } = notes;
+  const { notesTitle, notesBody, _id, noteBgColor } = notes;
   const [showIcons, setShowIcons] = useState(false);
+  console.log(noteBgColor);
   return (
     <div
+      style={{ background: noteBgColor }}
       className="card-outer-container "
       onMouseEnter={() => setShowIcons(true)}
       onMouseLeave={() => setShowIcons(false)}>

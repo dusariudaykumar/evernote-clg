@@ -1,10 +1,28 @@
 import React, { useState } from "react";
 import { useNotes } from "../../contexts/notes-context";
+import { CirclePicker } from "react-color";
 import "./NotesField.css";
-const NotesField = ({ notes, setNotes, addNoteHandler, updatehandler }) => {
+
+const colorsList = [
+  "#6F6921",
+  "#20505C",
+  "#414244",
+  "#082c6c",
+  "#532826",
+  "#3C5720",
+];
+const NotesField = ({
+  notes,
+  setNotes,
+  addNoteHandler,
+  updatehandler,
+  colorPalletHandler,
+  colorPickHandler,
+}) => {
   const {
-    noteState: { editNote },
+    noteState: { editNote, isColorPalletVisible, noteColor },
   } = useNotes();
+
   const changeHandler = (event) => {
     const { name, value } = event.target;
     setNotes((prev) => ({
@@ -20,6 +38,7 @@ const NotesField = ({ notes, setNotes, addNoteHandler, updatehandler }) => {
   return (
     <>
       <form
+        style={{ background: noteColor }}
         className="notes-field-wrapper "
         onSubmit={
           !editNote
@@ -59,11 +78,23 @@ const NotesField = ({ notes, setNotes, addNoteHandler, updatehandler }) => {
                 </span>
               </button>
 
-              <div className="notes-action-btn-wrapper">
-                <span className="material-icons">palette</span>
+              <div className="notes-action-btn-wrapper flex">
+                <span
+                  className="material-icons"
+                  onClick={() => colorPalletHandler()}>
+                  palette
+                </span>
+                {isColorPalletVisible && (
+                  <div>
+                    <CirclePicker
+                      className="color-palette"
+                      colors={colorsList}
+                      circleSpacing={1.3}
+                      onChangeComplete={colorPickHandler}
+                    />
+                  </div>
+                )}
                 <span className="material-icons">label</span>
-                <span className="material-icons">delete</span>
-                <span className="material-icons">archive</span>
               </div>
             </div>
           )}

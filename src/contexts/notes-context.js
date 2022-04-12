@@ -5,6 +5,8 @@ const initialState = {
   notes: [],
   editNote: false,
   archive: [],
+  isColorPalletVisible: false,
+  noteColor: "",
 };
 const NotesContext = createContext();
 const NotesProvider = ({ children }) => {

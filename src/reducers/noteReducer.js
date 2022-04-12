@@ -12,7 +12,6 @@ export const noteReducer = (state, action) => {
         ...state,
         editNote: true,
       };
-
     case "UPDATE_NOTE":
       return {
         ...state,
@@ -40,6 +39,17 @@ export const noteReducer = (state, action) => {
       return {
         ...state,
         archive: action.payload,
+      };
+    case "COLOR_PALLET_VISIBLE":
+      return {
+        ...state,
+        isColorPalletVisible: !state.isColorPalletVisible,
+      };
+    case "PICK_COLOR":
+      return {
+        ...state,
+        noteColor: action.payload.hex,
+        isColorPalletVisible: !state.isColorPalletVisible,
       };
     default:
       return {

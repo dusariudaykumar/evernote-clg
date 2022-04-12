@@ -9,17 +9,20 @@ import {
   editNotesService,
 } from "../../services";
 import "./Homepage.css";
+
 const initialNotes = {
   notesTitle: "",
   notesBody: "",
+  noteBgColor: "",
 };
 const Homepage = () => {
   const {
     authState: { encodedToken },
   } = useAuth();
   const { noteState, noteDispatch } = useNotes();
-  const [notes, setNotes] = useState(initialNotes);
 
+  const [notes, setNotes] = useState(initialNotes);
+  console.log(notes);
   const editHandler = (noteedit) => {
     setNotes({
       ...notes,
@@ -59,6 +62,16 @@ const Homepage = () => {
     const response = await addArchiveService(note, encodedToken);
     noteDispatch({ type: "ADD_ARCHIVE", payload: response.data });
   };
+  const colorPalletHandler = () => {
+    noteDispatch({ type: "COLOR_PALLET_VISIBLE" });
+  };
+  const colorPickHandler = (color) => {
+    noteDispatch({ type: "PICK_COLOR", payload: color });
+    setNotes((prev) => ({
+      ...prev,
+      noteBgColor: color.hex,
+    }));
+  };
 
   return (
     <div className="home-page-wrapper">
@@ -67,6 +80,8 @@ const Homepage = () => {
         notes={notes}
         addNoteHandler={addNoteHandler}
         updatehandler={updatehandler}
+        colorPalletHandler={colorPalletHandler}
+        colorPickHandler={colorPickHandler}
       />
       <div className=" notecard-container ">
         {noteState.notes.map((item) => (
