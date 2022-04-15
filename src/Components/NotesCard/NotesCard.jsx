@@ -28,6 +28,7 @@ const NotesCard = ({
         <div className="card-body">
           <p className="card-description">{notesBody}</p>
         </div>
+
         {showIcons && (
           <div className="card-btns flex">
             {path !== "/trash" ? (

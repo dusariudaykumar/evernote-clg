@@ -1,5 +1,6 @@
 .card-outer-container {
-  max-width: 30rem;
+  width: 26rem;
+  min-height: 11rem;
   margin: 10px;
   background-color: transparent;
   border: 1px solid var(--border-color);
@@ -18,10 +19,14 @@
 .card-description {
   letter-spacing: 1px;
   font-weight: 500;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 .card-btns {
   justify-content: end;
   gap: 10px;
+  margin: 0;
 }
 .card-btns span {
   cursor: pointer;
@@ -29,4 +34,8 @@
 }
 .card-btns span:hover {
   color: var(--font-color);
+}
+.note-card-color {
+  left: 0;
+  gap: 6px;
 }
