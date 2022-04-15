@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { NotesCard, NotesField } from "../../Components";
-import { useAuth } from "../../contexts";
-import { useNotes } from "../../contexts/notes-context";
+import { useAuth, useNotes } from "../../contexts";
+
 import {
   addArchiveService,
   addNotesService,

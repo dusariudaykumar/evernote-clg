@@ -87,14 +87,12 @@ const NotesField = ({
                   palette
                 </span>
                 {isColorPalletVisible && (
-                  <div>
-                    <CirclePicker
-                      className="color-palette"
-                      colors={colorsList}
-                      circleSpacing={1}
-                      onChangeComplete={colorPickHandler}
-                    />
-                  </div>
+                  <CirclePicker
+                    className="color-palette"
+                    colors={colorsList}
+                    circleSpacing={1}
+                    onChangeComplete={colorPickHandler}
+                  />
                 )}
                 <span className="material-icons">label</span>
               </div>

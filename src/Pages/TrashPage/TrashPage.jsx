@@ -21,7 +21,6 @@ const TrashPage = () => {
   };
   const restoreFromTrash = async (notes) => {
     const response = await addNotesService(notes, encodedToken);
-    console.log(response);
     noteDispatch({
       type: "ADD_NOTE",
       payload: response.data.notes,

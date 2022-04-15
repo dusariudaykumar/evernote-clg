@@ -1,5 +1,4 @@
 export const noteReducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case "ADD_NOTE":
       return {
@@ -54,7 +53,6 @@ export const noteReducer = (state, action) => {
       return {
         ...state,
         isNoteColor: !state.isNoteColor,
-        // isColorPalletVisible: !state.isColorPalletVisible,
       };
     case "DELETE_FROM_TRASH":
       return {
