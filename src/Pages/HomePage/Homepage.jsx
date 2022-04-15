@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { NotesCard, NotesField } from "../../Components";
 import { useAuth } from "../../contexts";
 import { useNotes } from "../../contexts/notes-context";
@@ -22,13 +23,14 @@ const Homepage = () => {
   const { noteState, noteDispatch } = useNotes();
 
   const [notes, setNotes] = useState(initialNotes);
-  console.log(notes);
+
   const editHandler = (noteedit) => {
     setNotes({
       ...notes,
       _id: noteedit._id,
       notesTitle: noteedit.notesTitle,
       notesBody: noteedit.notesBody,
+      noteBgColor: noteedit.noteBgColor,
     });
     noteDispatch({ type: "EDIT_NOTE" });
   };
@@ -39,6 +41,7 @@ const Homepage = () => {
       type: "ADD_NOTE",
       payload: response.data.notes,
     });
+    toast.success("Created new note");
     setNotes(initialNotes);
   };
 
@@ -58,6 +61,13 @@ const Homepage = () => {
       payload: resp.data.notes,
     });
   };
+  const trashNoteHandler = async (note) => {
+    noteDispatch({ type: "MOVE_TO_TRASH", payload: note });
+    noteState.notes.find(
+      (noteItem) => noteItem._id === note._id && deleteNoteHandler(noteItem._id)
+    );
+  };
+
   const addArchiveHandler = async (note) => {
     const response = await addArchiveService(note, encodedToken);
     noteDispatch({ type: "ADD_ARCHIVE", payload: response.data });
@@ -66,7 +76,7 @@ const Homepage = () => {
     noteDispatch({ type: "COLOR_PALLET_VISIBLE" });
   };
   const colorPickHandler = (color) => {
-    noteDispatch({ type: "PICK_COLOR", payload: color });
+    noteDispatch({ type: "COLOR_PALLET_VISIBLE" });
     setNotes((prev) => ({
       ...prev,
       noteBgColor: color.hex,
@@ -89,7 +99,7 @@ const Homepage = () => {
             key={item._id}
             notes={item}
             editHandler={editHandler}
-            deleteNoteHandler={deleteNoteHandler}
+            trashNoteHandler={trashNoteHandler}
             addArchiveHandler={addArchiveHandler}
           />
         ))}
