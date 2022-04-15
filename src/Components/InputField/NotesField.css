@@ -74,7 +74,6 @@
   align-items: center;
   gap: 9px;
 }
-
 .notes-action-btn-wrapper span {
   font-size: 2rem;
   margin-right: 10px;
@@ -85,9 +84,8 @@
 }
 .color-palette {
   position: absolute;
-  left: 3rem;
-  bottom: 5px;
-
+  left: 1rem;
+  bottom: -3.4rem;
   background-color: var(--primary-color);
   padding: 5px;
   display: inline-flex;
