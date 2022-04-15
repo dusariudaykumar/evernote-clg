@@ -6,6 +6,6 @@ const ProtectedRoute = () => {
     authState: { isAuth },
   } = useAuth();
 
-  return isAuth ? <Outlet /> : <Navigate to="/login" />;
+  return isAuth ? <Outlet /> : <Navigate to="/login" replace />;
 };
 export { ProtectedRoute };
