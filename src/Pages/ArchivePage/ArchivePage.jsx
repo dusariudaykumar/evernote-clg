@@ -10,7 +10,7 @@ const ArchivePage = () => {
     authState: { encodedToken },
   } = useAuth();
   const {
-    noteState: { archive, trash },
+    noteState: { archive },
     noteDispatch,
   } = useNotes();
   const unArchiveHandler = async (note) => {
