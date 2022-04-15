@@ -19,8 +19,9 @@ const NotesField = ({
   colorPalletHandler,
   colorPickHandler,
 }) => {
+  const { noteBgColor, notesTitle, notesBody } = notes;
   const {
-    noteState: { editNote, isColorPalletVisible, noteColor },
+    noteState: { editNote, isColorPalletVisible },
   } = useNotes();
 
   const changeHandler = (event) => {
@@ -38,7 +39,7 @@ const NotesField = ({
   return (
     <>
       <form
-        style={{ background: noteColor }}
+        style={{ background: noteBgColor }}
         className="notes-field-wrapper "
         onSubmit={
           !editNote
@@ -49,11 +50,12 @@ const NotesField = ({
           {isExpanded && (
             <div className="title-container flex">
               <input
+                autocomplete="off"
                 type="text"
                 name="notesTitle"
                 className="notes-field-title"
                 placeholder="Title"
-                value={notes.notesTitle}
+                value={notesTitle}
                 onChange={changeHandler}
               />
               <span className="material-icons-outlined">push_pin</span>
@@ -65,7 +67,7 @@ const NotesField = ({
               name="notesBody"
               placeholder="Notes....."
               rows={isExpanded ? 3 : 1}
-              value={notes.notesBody}
+              value={notesBody}
               onClick={expandHandler}
               onChange={changeHandler}
             />
@@ -89,7 +91,7 @@ const NotesField = ({
                     <CirclePicker
                       className="color-palette"
                       colors={colorsList}
-                      circleSpacing={1.3}
+                      circleSpacing={1}
                       onChangeComplete={colorPickHandler}
                     />
                   </div>
