@@ -10,7 +10,7 @@ const ArchivePage = () => {
     authState: { encodedToken },
   } = useAuth();
   const {
-    noteState: { archive },
+    noteState: { archive, trash },
     noteDispatch,
   } = useNotes();
   const unArchiveHandler = async (note) => {
@@ -22,6 +22,15 @@ const ArchivePage = () => {
     const response = await deleteArchiveService(noteId, encodedToken);
     noteDispatch({ type: "ARCHIVE_DELETE", payload: response.data.archives });
   };
+
+  const archiveTrashHandler = (note) => {
+    noteDispatch({ type: "MOVE_TO_TRASH", payload: note });
+    archive.find(
+      (noteItem) =>
+        noteItem._id === note._id && archiveDeleteHandler(noteItem._id)
+    );
+  };
+
   return (
     <div className=" archive-wrapper ">
       {archive.length > 0 ? (
@@ -31,6 +40,7 @@ const ArchivePage = () => {
             notes={note}
             unArchiveHandler={unArchiveHandler}
             archiveDeleteHandler={archiveDeleteHandler}
+            archiveTrashHandler={archiveTrashHandler}
             path={location.pathname}
           />
         ))
