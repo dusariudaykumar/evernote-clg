@@ -26,7 +26,7 @@
   margin-bottom: 1rem;
 }
 .card-btns {
-  justify-content: end;
+  justify-content: flex-end;
   gap: 10px;
 }
 .card-btns span {
