@@ -1,10 +1,30 @@
-import React, { useState } from "react";
 import { useNotes } from "../../contexts/notes-context";
+import { CirclePicker } from "react-color";
 import "./NotesField.css";
-const NotesField = ({ notes, setNotes, addNoteHandler, updatehandler }) => {
+
+const colorsList = [
+  "#6F6921",
+  "#20505C",
+  "#414244",
+  "#082c6c",
+  "#532826",
+  "#3C5720",
+];
+const NotesField = ({
+  notes,
+  setIsExpanded,
+  isExpanded,
+  setNotes,
+  addNoteHandler,
+  updatehandler,
+  colorPalletHandler,
+  colorPickHandler,
+}) => {
+  const { noteBgColor, notesTitle, notesBody } = notes;
   const {
-    noteState: { editNote },
+    noteState: { editNote, isColorPalletVisible },
   } = useNotes();
+
   const changeHandler = (event) => {
     const { name, value } = event.target;
     setNotes((prev) => ({
@@ -12,7 +32,7 @@ const NotesField = ({ notes, setNotes, addNoteHandler, updatehandler }) => {
       [name]: value,
     }));
   };
-  const [isExpanded, setIsExpanded] = useState(false);
+
   const expandHandler = () => {
     setIsExpanded(true);
   };
@@ -20,6 +40,7 @@ const NotesField = ({ notes, setNotes, addNoteHandler, updatehandler }) => {
   return (
     <>
       <form
+        style={{ background: noteBgColor }}
         className="notes-field-wrapper "
         onSubmit={
           !editNote
@@ -30,12 +51,14 @@ const NotesField = ({ notes, setNotes, addNoteHandler, updatehandler }) => {
           {isExpanded && (
             <div className="title-container flex">
               <input
+                autocomplete="off"
                 type="text"
                 name="notesTitle"
                 className="notes-field-title"
                 placeholder="Title"
-                value={notes.notesTitle}
+                value={notesTitle}
                 onChange={changeHandler}
+                required
               />
               <span className="material-icons-outlined">push_pin</span>
             </div>
@@ -46,9 +69,10 @@ const NotesField = ({ notes, setNotes, addNoteHandler, updatehandler }) => {
               name="notesBody"
               placeholder="Notes....."
               rows={isExpanded ? 3 : 1}
-              value={notes.notesBody}
+              value={notesBody}
               onClick={expandHandler}
               onChange={changeHandler}
+              required
             />
           </div>
           {isExpanded && (
@@ -59,11 +83,21 @@ const NotesField = ({ notes, setNotes, addNoteHandler, updatehandler }) => {
                 </span>
               </button>
 
-              <div className="notes-action-btn-wrapper">
-                <span className="material-icons">palette</span>
+              <div className="notes-action-btn-wrapper flex">
+                <span
+                  className="material-icons"
+                  onClick={() => colorPalletHandler()}>
+                  palette
+                </span>
+                {isColorPalletVisible && (
+                  <CirclePicker
+                    className="color-palette"
+                    colors={colorsList}
+                    circleSpacing={1}
+                    onChangeComplete={colorPickHandler}
+                  />
+                )}
                 <span className="material-icons">label</span>
-                <span className="material-icons">delete</span>
-                <span className="material-icons">archive</span>
               </div>
             </div>
           )}

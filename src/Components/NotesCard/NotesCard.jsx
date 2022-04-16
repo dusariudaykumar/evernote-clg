@@ -1,18 +1,23 @@
 import { useState } from "react";
 import "./NotesCard.css";
+
 const NotesCard = ({
   notes,
   editHandler,
-  deleteNoteHandler,
+  trashNoteHandler,
   addArchiveHandler,
   path,
+  deleteFromTrashhandler,
   unArchiveHandler,
-  archiveDeleteHandler,
+  restoreFromTrash,
+  archiveTrashHandler,
 }) => {
-  const { notesTitle, notesBody, _id } = notes;
+  const { notesTitle, notesBody, _id, noteBgColor } = notes;
+
   const [showIcons, setShowIcons] = useState(false);
   return (
     <div
+      style={{ background: noteBgColor }}
       className="card-outer-container "
       onMouseEnter={() => setShowIcons(true)}
       onMouseLeave={() => setShowIcons(false)}>
@@ -23,41 +28,57 @@ const NotesCard = ({
         <div className="card-body">
           <p className="card-description">{notesBody}</p>
         </div>
-        {showIcons && (
-          <div className="card-btns flex">
-            <span
-              className="material-icons-outlined"
-              onClick={() => editHandler({ ...notes, _id: _id })}>
-              edit
-            </span>
-            <span className="material-icons">palette</span>
-            <span className="material-icons">label</span>
 
-            <span
-              className="material-icons"
-              onClick={
-                path !== "/archive"
-                  ? () => deleteNoteHandler(_id)
-                  : () => archiveDeleteHandler(_id)
-              }>
-              delete
-            </span>
+        <div
+          className="card-btns flex "
+          style={{ visibility: showIcons ? "visible" : "hidden" }}>
+          {path !== "/trash" ? (
+            <>
+              <span
+                className="material-icons-outlined"
+                onClick={() => editHandler({ ...notes, _id: _id })}>
+                edit
+              </span>
 
-            {path !== "/archive" ? (
+              <span className="material-icons">label</span>
+              {path !== "/archive" ? (
+                <span
+                  className="material-icons"
+                  onClick={() => addArchiveHandler(notes)}>
+                  archive
+                </span>
+              ) : (
+                <span
+                  className="material-icons"
+                  onClick={() => unArchiveHandler(notes)}>
+                  unarchive
+                </span>
+              )}
               <span
                 className="material-icons"
-                onClick={() => addArchiveHandler(notes)}>
-                archive
+                onClick={
+                  path !== "/archive"
+                    ? () => trashNoteHandler(notes)
+                    : () => archiveTrashHandler(notes)
+                }>
+                delete
               </span>
-            ) : (
+            </>
+          ) : (
+            <>
               <span
                 className="material-icons"
-                onClick={() => unArchiveHandler(notes)}>
-                unarchive
+                onClick={() => restoreFromTrash(notes)}>
+                restore_from_trash
               </span>
-            )}
-          </div>
-        )}
+              <span
+                className="material-icons"
+                onClick={() => deleteFromTrashhandler(notes)}>
+                delete
+              </span>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

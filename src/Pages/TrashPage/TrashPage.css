@@ -1,4 +1,4 @@
-.archive-wrapper {
+.trash-wrapper {
   width: 100%;
   margin: 1rem;
   display: flex;
@@ -6,9 +6,8 @@
   column-fill: balance;
   column-count: 2;
 }
-.archive-text {
+.trash-text {
   color: var(--font-color);
-  letter-spacing: 0.2px;
   margin: auto;
   font-weight: 500;
 }

@@ -1,5 +1,4 @@
 export const noteReducer = (state, action) => {
-  console.log(state, action);
   switch (action.type) {
     case "ADD_NOTE":
       return {
@@ -12,12 +11,16 @@ export const noteReducer = (state, action) => {
         ...state,
         editNote: true,
       };
-
     case "UPDATE_NOTE":
       return {
         ...state,
         notes: action.payload,
         editNote: false,
+      };
+    case "MOVE_TO_TRASH":
+      return {
+        ...state,
+        trash: [...state.trash, { ...action.payload }],
       };
     case "DELETE_NOTE":
       return {
@@ -40,6 +43,21 @@ export const noteReducer = (state, action) => {
       return {
         ...state,
         archive: action.payload,
+      };
+    case "COLOR_PALLET_VISIBLE":
+      return {
+        ...state,
+        isColorPalletVisible: !state.isColorPalletVisible,
+      };
+    case "PICK_COLOR":
+      return {
+        ...state,
+        isNoteColor: !state.isNoteColor,
+      };
+    case "DELETE_FROM_TRASH":
+      return {
+        ...state,
+        trash: action.payload,
       };
     default:
       return {
