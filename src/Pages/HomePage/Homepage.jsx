@@ -23,6 +23,7 @@ const Homepage = () => {
   const { noteState, noteDispatch } = useNotes();
 
   const [notes, setNotes] = useState(initialNotes);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const editHandler = (noteedit) => {
     setNotes({
@@ -43,6 +44,7 @@ const Homepage = () => {
     });
     toast.success("Created new note");
     setNotes(initialNotes);
+    setIsExpanded(false);
   };
 
   const updatehandler = async (e, editnotes) => {
@@ -53,6 +55,7 @@ const Homepage = () => {
       payload: resp.data.notes,
     });
     setNotes(initialNotes);
+    setIsExpanded(false);
   };
   const deleteNoteHandler = async (notesId) => {
     const resp = await deleteNotesService(notesId, encodedToken);
@@ -88,6 +91,8 @@ const Homepage = () => {
       <NotesField
         setNotes={setNotes}
         notes={notes}
+        isExpanded={isExpanded}
+        setIsExpanded={setIsExpanded}
         addNoteHandler={addNoteHandler}
         updatehandler={updatehandler}
         colorPalletHandler={colorPalletHandler}

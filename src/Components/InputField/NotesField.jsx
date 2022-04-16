@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useNotes } from "../../contexts/notes-context";
 import { CirclePicker } from "react-color";
 import "./NotesField.css";
@@ -13,6 +12,8 @@ const colorsList = [
 ];
 const NotesField = ({
   notes,
+  setIsExpanded,
+  isExpanded,
   setNotes,
   addNoteHandler,
   updatehandler,
@@ -31,7 +32,7 @@ const NotesField = ({
       [name]: value,
     }));
   };
-  const [isExpanded, setIsExpanded] = useState(false);
+
   const expandHandler = () => {
     setIsExpanded(true);
   };
@@ -57,6 +58,7 @@ const NotesField = ({
                 placeholder="Title"
                 value={notesTitle}
                 onChange={changeHandler}
+                required
               />
               <span className="material-icons-outlined">push_pin</span>
             </div>
@@ -70,6 +72,7 @@ const NotesField = ({
               value={notesBody}
               onClick={expandHandler}
               onChange={changeHandler}
+              required
             />
           </div>
           {isExpanded && (

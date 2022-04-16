@@ -1,5 +1,13 @@
 .trash-wrapper {
-  max-width: 100%;
-  margin: 1rem auto;
+  width: 100%;
+  margin: 1rem;
+  display: flex;
   flex-wrap: wrap;
+  column-fill: balance;
+  column-count: 2;
+}
+.trash-text {
+  color: var(--font-color);
+  margin: auto;
+  font-weight: 500;
 }

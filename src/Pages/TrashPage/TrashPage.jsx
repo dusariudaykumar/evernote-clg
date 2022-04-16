@@ -25,7 +25,6 @@ const TrashPage = () => {
       type: "ADD_NOTE",
       payload: response.data.notes,
     });
-    toast.success("Restored Successfully!");
     deleteFromTrashhandler(notes);
   };
   const location = useLocation();
@@ -43,7 +42,7 @@ const TrashPage = () => {
           />
         ))
       ) : (
-        <h3 className="archive-text">Trash is empty!</h3>
+        <p className="trash-text">Trash is empty!</p>
       )}
     </div>
   );

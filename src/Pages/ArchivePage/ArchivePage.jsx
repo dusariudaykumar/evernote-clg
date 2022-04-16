@@ -45,7 +45,7 @@ const ArchivePage = () => {
           />
         ))
       ) : (
-        <h3 className="archive-text">You don't have any archived notes!</h3>
+        <p className="archive-text">You don't have any archived notes!</p>
       )}
     </div>
   );
