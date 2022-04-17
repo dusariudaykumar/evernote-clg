@@ -16,11 +16,11 @@ Notes App is a note taking app that makes you efficient and helps in faster and 
 ## Features
 
 - User Authentication.
-- Users can add notes. 
-- Users can update notes.
-- Users can archive, unarchive or move a note to the trash.
-- Users can also add in background colors to the notes.
-- Users can create labels, delete labels.
+- User can add notes. 
+- User can update notes.
+- User can archive, unarchive or move a note to the trash.
+- User can also add in background colors to the notes.
+- User can create labels, delete labels.
 
 ## Getting Started
 
