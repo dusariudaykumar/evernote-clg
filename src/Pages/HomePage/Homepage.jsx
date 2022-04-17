@@ -2,13 +2,13 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { NotesCard, NotesField } from "../../Components";
 import { useAuth, useNotes } from "../../contexts";
-
 import {
   addArchiveService,
   addNotesService,
   deleteNotesService,
   editNotesService,
 } from "../../services";
+import { FilterByLabel, SortByDateTime } from "../../Utils/index";
 import "./Homepage.css";
 
 const initialNotes = {
@@ -16,6 +16,7 @@ const initialNotes = {
   notesBody: "",
   noteBgColor: "",
   label: "",
+  editedAt: "",
 };
 const Homepage = () => {
   const {
@@ -33,17 +34,22 @@ const Homepage = () => {
       notesBody: noteedit.notesBody,
       noteBgColor: noteedit.noteBgColor,
       label: noteedit.label,
+      editedAt: new Date(),
     });
     noteDispatch({ type: "EDIT_NOTE" });
     setIsExpanded(true);
   };
   const addNoteHandler = async (event, note) => {
     event.preventDefault();
-    const response = await addNotesService(note, encodedToken);
+    const response = await addNotesService(
+      { ...note, editedAt: new Date() },
+      encodedToken
+    );
     noteDispatch({
       type: "ADD_NOTE",
       payload: response.data.notes,
     });
+
     toast.success("Created new note");
     setNotes(initialNotes);
     setIsExpanded(false);
@@ -56,7 +62,6 @@ const Homepage = () => {
       type: "UPDATE_NOTE",
       payload: resp.data.notes,
     });
-    console.log(editnotes);
     setNotes(initialNotes);
     setIsExpanded(false);
   };
@@ -89,6 +94,9 @@ const Homepage = () => {
       noteBgColor: color.hex,
     }));
   };
+  const filterData = FilterByLabel(noteState.notes, noteState.filterBy);
+
+  const sortedNotes = SortByDateTime(filterData, noteState.sortBy);
 
   return (
     <div className="home-page-wrapper">
@@ -103,7 +111,7 @@ const Homepage = () => {
         colorPickHandler={colorPickHandler}
       />
       <div className=" notecard-container ">
-        {noteState.notes.map((item) => (
+        {sortedNotes.map((item) => (
           <NotesCard
             key={item._id}
             notes={item}

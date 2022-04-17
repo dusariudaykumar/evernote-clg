@@ -6,8 +6,10 @@ const initialState = {
   editNote: false,
   archive: [],
   trash: [],
-  label: [],
+  label: ["Notes", "Important", "Label 1"],
   isColorPalletVisible: false,
+  sortBy: "",
+  filterBy: "",
 };
 const NotesContext = createContext();
 const NotesProvider = ({ children }) => {

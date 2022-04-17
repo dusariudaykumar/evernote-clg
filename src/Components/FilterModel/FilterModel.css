@@ -1,0 +1,44 @@
+.filter-wrapper {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  min-height: 5rem;
+  min-width: 8rem;
+  position: absolute;
+  top: 33px;
+  z-index: 3;
+  background-color: var(--primary-color);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+.filter-title {
+  font-size: 1rem;
+}
+.date-filter {
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.filter-clear-btn {
+  border: none;
+  outline: none;
+  width: max-content;
+  padding: 3px;
+  background-color: transparent;
+  color: var(--font-color);
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.label-filter {
+  gap: 10px;
+  margin-bottom: 5px;
+}
+.label-filter label,
+.date-filter label {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}

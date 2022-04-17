@@ -18,8 +18,8 @@ const Login = () => {
   const testHandler = (e) => {
     e.preventDefault();
     setLoginData({
-      email: "adarshbalika@gmail.com",
-      password: "adarshBalika123",
+      email: "udaykumar@gmail.com",
+      password: "password@123",
     });
   };
   const loginFormChangeHandler = (e) => {

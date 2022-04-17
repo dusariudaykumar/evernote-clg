@@ -69,6 +69,26 @@ export const noteReducer = (state, action) => {
         ...state,
         label: action.payload,
       };
+    case "SORT_BY_DATE":
+      return {
+        ...state,
+        sortBy:
+          action.payload === "newest_first"
+            ? "NEWEST_FIRST"
+            : action.payload === "oldest_first"
+            ? "OLDEST_FIRST"
+            : "",
+      };
+    case "FILTER_BY_LABEL":
+      return {
+        ...state,
+        filterBy: action.payload,
+      };
+    case "CLEAR_FILTER":
+      return {
+        ...state,
+        filterBy: "",
+      };
     default:
       return {
         ...state,
