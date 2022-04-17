@@ -1,6 +1,8 @@
 import { useNotes } from "../../contexts/notes-context";
 import { CirclePicker } from "react-color";
 import "./NotesField.css";
+import { useState } from "react";
+import { LabelModel } from "../index";
 
 const colorsList = [
   "#6F6921",
@@ -24,7 +26,7 @@ const NotesField = ({
   const {
     noteState: { editNote, isColorPalletVisible },
   } = useNotes();
-
+  const [showLabelModel, setShowLabelModel] = useState(false);
   const changeHandler = (event) => {
     const { name, value } = event.target;
     setNotes((prev) => ({
@@ -32,7 +34,7 @@ const NotesField = ({
       [name]: value,
     }));
   };
-
+  const fromNoteFeild = true;
   const expandHandler = () => {
     setIsExpanded(true);
   };
@@ -51,7 +53,7 @@ const NotesField = ({
           {isExpanded && (
             <div className="title-container flex">
               <input
-                autocomplete="off"
+                autoComplete="off"
                 type="text"
                 name="notesTitle"
                 className="notes-field-title"
@@ -97,7 +99,20 @@ const NotesField = ({
                     onChangeComplete={colorPickHandler}
                   />
                 )}
-                <span className="material-icons">label</span>
+                <span className="label-icon">
+                  <span
+                    className="material-icons"
+                    onClick={() => setShowLabelModel((prev) => !prev)}>
+                    label
+                  </span>
+                  {showLabelModel && (
+                    <LabelModel
+                      setNotes={setNotes}
+                      notes={notes}
+                      fromNoteFeild={fromNoteFeild}
+                    />
+                  )}
+                </span>
               </div>
             </div>
           )}

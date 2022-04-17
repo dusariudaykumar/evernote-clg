@@ -73,6 +73,7 @@
   width: 100%;
   align-items: center;
   gap: 9px;
+  justify-content: flex-start;
 }
 .notes-action-btn-wrapper span {
   font-size: 2rem;
@@ -92,4 +93,8 @@
   box-shadow: var(--box-shadow);
   border: 1px solid var(--border-color);
   border-radius: 8px;
+}
+.label-icon {
+  position: relative;
+  display: flex;
 }

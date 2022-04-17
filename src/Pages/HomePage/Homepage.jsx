@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { NotesCard, NotesField } from "../../Components";
 import { useAuth, useNotes } from "../../contexts";
@@ -15,13 +15,13 @@ const initialNotes = {
   notesTitle: "",
   notesBody: "",
   noteBgColor: "",
+  label: "",
 };
 const Homepage = () => {
   const {
     authState: { encodedToken },
   } = useAuth();
   const { noteState, noteDispatch } = useNotes();
-
   const [notes, setNotes] = useState(initialNotes);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -32,8 +32,10 @@ const Homepage = () => {
       notesTitle: noteedit.notesTitle,
       notesBody: noteedit.notesBody,
       noteBgColor: noteedit.noteBgColor,
+      label: noteedit.label,
     });
     noteDispatch({ type: "EDIT_NOTE" });
+    setIsExpanded(true);
   };
   const addNoteHandler = async (event, note) => {
     event.preventDefault();
@@ -54,6 +56,7 @@ const Homepage = () => {
       type: "UPDATE_NOTE",
       payload: resp.data.notes,
     });
+    console.log(editnotes);
     setNotes(initialNotes);
     setIsExpanded(false);
   };
@@ -75,6 +78,7 @@ const Homepage = () => {
     const response = await addArchiveService(note, encodedToken);
     noteDispatch({ type: "ADD_ARCHIVE", payload: response.data });
   };
+
   const colorPalletHandler = () => {
     noteDispatch({ type: "COLOR_PALLET_VISIBLE" });
   };

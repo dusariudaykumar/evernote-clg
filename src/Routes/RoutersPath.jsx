@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import {
   ArchivePage,
   Homepage,
+  LabelPage,
   LandingPage,
   Login,
   SignUp,
@@ -22,6 +23,7 @@ const RoutersPath = () => {
         <Route path="/home" element={<Homepage />} />
         <Route path="/archive" element={<ArchivePage />} />
         <Route path="/trash" element={<TrashPage />} />
+        <Route path="/label" element={<LabelPage />} />
       </Route>
     </Routes>
   );

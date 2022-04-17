@@ -6,6 +6,7 @@ const initialState = {
   editNote: false,
   archive: [],
   trash: [],
+  label: [],
   isColorPalletVisible: false,
 };
 const NotesContext = createContext();
