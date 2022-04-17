@@ -56,3 +56,10 @@
   padding: 3px 9px;
   cursor: default;
 }
+.note-footer {
+  display: inline-flex;
+  justify-content: space-between;
+}
+.card-date {
+  font-size: 1rem;
+}

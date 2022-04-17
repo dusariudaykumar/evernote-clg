@@ -1,7 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 export const editNotesService = async (editnotes, encodedToken) => {
-  console.log(editnotes, "from service");
   try {
     const resp = await axios.post(
       `/api/notes/${editnotes._id}`,
