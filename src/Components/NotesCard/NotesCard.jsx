@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { LabelModel } from "../LabelModel/LabelModel";
 import "./NotesCard.css";
 
 const NotesCard = ({
@@ -12,9 +13,10 @@ const NotesCard = ({
   restoreFromTrash,
   archiveTrashHandler,
 }) => {
-  const { notesTitle, notesBody, _id, noteBgColor } = notes;
-
+  const { notesTitle, notesBody, _id, noteBgColor, label } = notes;
+  const fromNoteFeild = false;
   const [showIcons, setShowIcons] = useState(false);
+  const [showLabelModel, setShowLabelModel] = useState(false);
   return (
     <div
       style={{ background: noteBgColor }}
@@ -27,6 +29,11 @@ const NotesCard = ({
         </div>
         <div className="card-body">
           <p className="card-description">{notesBody}</p>
+          {label && (
+            <div className="chip-container">
+              <span className="chip">{label}</span>
+            </div>
+          )}
         </div>
 
         <div
@@ -39,8 +46,20 @@ const NotesCard = ({
                 onClick={() => editHandler({ ...notes, _id: _id })}>
                 edit
               </span>
-
-              <span className="material-icons">label</span>
+              <span className="label-icon">
+                <span
+                  className="material-icons"
+                  onClick={() => setShowLabelModel((prev) => !prev)}>
+                  label
+                </span>
+                {showLabelModel && (
+                  <LabelModel
+                    notes={notes}
+                    fromNoteFeild={fromNoteFeild}
+                    setShowLabelModel={setShowLabelModel}
+                  />
+                )}
+              </span>
               {path !== "/archive" ? (
                 <span
                   className="material-icons"

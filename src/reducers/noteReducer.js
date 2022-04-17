@@ -14,7 +14,7 @@ export const noteReducer = (state, action) => {
     case "UPDATE_NOTE":
       return {
         ...state,
-        notes: action.payload,
+        notes: [...action.payload],
         editNote: false,
       };
     case "MOVE_TO_TRASH":
@@ -58,6 +58,16 @@ export const noteReducer = (state, action) => {
       return {
         ...state,
         trash: action.payload,
+      };
+    case "ADD_LABELS":
+      return {
+        ...state,
+        label: [...state.label, action.payload],
+      };
+    case "REMOVE_LABEL":
+      return {
+        ...state,
+        label: action.payload,
       };
     default:
       return {

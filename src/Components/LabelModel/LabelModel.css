@@ -1,0 +1,25 @@
+.label-model-container {
+  min-width: 8rem;
+  width: max-content;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 32px;
+  background-color: var(--primary-color);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 5px 10px;
+  z-index: 3;
+}
+.label-radio {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 1.2rem;
+}
+.none-label {
+  align-self: flex-start;
+  font-size: 1.1rem;
+}

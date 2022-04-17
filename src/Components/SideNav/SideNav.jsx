@@ -30,7 +30,7 @@ const SideNav = () => {
           </NavLink>
         </li>
         <li className="nav-pill">
-          <NavLink style={getActiveStyle} to="/home">
+          <NavLink style={getActiveStyle} to="/label">
             <div className="flex nav-icon-container">
               <span className="material-icons-outlined side-nav-icon">
                 label
