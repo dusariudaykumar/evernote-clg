@@ -14,8 +14,14 @@ const LabelPage = () => {
     if (labelValue !== "" && !label.includes(labelValue)) {
       noteDispatch({ type: "ADD_LABELS", payload: labelValue });
       setLabelValue("");
+      toast.success("successfully Label Added");
+    } else if (labelValue === "") {
+      toast.error("Label value should'nt be empty");
+      setLabelValue("");
+    } else {
+      toast.error("Label already exists");
+      setLabelValue("");
     }
-    setLabelValue("");
   };
   const deleteTableHandler = (labelName) => {
     const data = label.filter((item) => item !== labelName);
