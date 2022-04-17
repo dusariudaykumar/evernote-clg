@@ -24,7 +24,7 @@ const NotesField = ({
 }) => {
   const { noteBgColor, notesTitle, notesBody } = notes;
   const {
-    noteState: { editNote, isColorPalletVisible, label },
+    noteState: { editNote, isColorPalletVisible },
   } = useNotes();
   const [showLabelModel, setShowLabelModel] = useState(false);
   const changeHandler = (event) => {
