@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap");
 .navigation-bar {
   border-radius: 0;
   border: 0;
@@ -26,6 +27,8 @@
 }
 .brand-name {
   color: var(--light-secondary-color);
+  font-family: "Caveat", cursive;
+  font-size: 2rem;
 }
 .brand-name:hover {
   color: var(--font-color);
