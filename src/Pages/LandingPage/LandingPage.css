@@ -1,21 +1,21 @@
 .landing-page-wrapper {
   background-color: var(--white);
-  margin: 1rem;
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-areas: "content  image-container";
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
 }
 .hero-container {
   grid-area: "image-container";
   order: 1;
+  overflow: hidden;
 }
 .hero-img {
-  width: 100%;
+  width: 90%;
 }
 .landing-page-container {
   grid-area: "content";
