@@ -1,0 +1,26 @@
+:root {
+  --primary-color: #202124;
+  --hover-color: #41331c;
+  --nav-icon-hover: rgba(232, 234, 237, 0.08);
+  --border-color: #5f6368;
+  --font-color: #e8eaed;
+  --secondary-color: #ffffff;
+  --light-secondary-color: #c6c6c6;
+  --background-color: #f7f7f7;
+  --login-box-shadow: #0000001a 0px 4px 12px;
+  --box-shadow: 0 3px 5px rgb(0 0 0 / 20%);
+  --add-btn-color: #fbbc04;
+  --dark-bg: #1f1f1f;
+}
+body {
+  background-color: var(--primary-color);
+}
+/* ul li {
+  list-style: none;
+} */
+.main-wrapper {
+  display: grid;
+  grid-template-rows: auto 2fr;
+  grid-template-columns: auto 1fr;
+  min-height: 80vh;
+}

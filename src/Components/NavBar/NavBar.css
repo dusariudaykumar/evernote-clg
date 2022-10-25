@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap");
+.navigation-bar {
+  border-radius: 0;
+  border: 0;
+  height: max-content;
+  background-color: var(--primary-color);
+  color: var(--font-color);
+  grid-column: 1/-1;
+  grid-row: 1 / span 1;
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 10px;
+}
+.hamberger-icon {
+  cursor: pointer;
+  height: 3.5rem;
+  width: 3.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--light-secondary-color);
+}
+.hamberger-icon:hover {
+  background-color: var(--nav-icon-hover);
+  border-radius: 50%;
+  color: var(--font-color);
+}
+.brand-name {
+  color: var(--light-secondary-color);
+  font-family: "Caveat", cursive;
+  font-size: 2rem;
+}
+.brand-name:hover {
+  color: var(--font-color);
+}
+.nav-left-wrapper {
+  align-items: center;
+}
+.hide-content {
+  display: none;
+}
+.search-wrapper {
+  display: inline-flex;
+  align-items: center;
+  width: 30rem;
+  max-width: 30rem;
+  min-width: 15rem;
+  border-radius: 0.5rem;
+  outline: none;
+  border: 1px solid var(--border-color);
+  font-size: 1rem;
+  margin: auto;
+}
+.note-search-feild {
+  width: 100%;
+  margin-left: 5px;
+  padding: 10px;
+  background-color: var(--primary-color);
+  border: none;
+  outline: none;
+  color: var(--font-color);
+  font-size: 1.2rem;
+}
+.filter-icon {
+  font-size: 2.2rem;
+  cursor: pointer;
+  color: var(--light-secondary-color);
+}
+.filter-icon:hover {
+  color: var(--font-color);
+}
+.filter-icon-wrapper {
+  position: relative;
+}
+@media only screen and (max-width: 650px) {
+  /* .hide-content {
+    display: flex;
+  } */
+}

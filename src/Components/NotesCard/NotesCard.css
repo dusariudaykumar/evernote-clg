@@ -1,0 +1,68 @@
+.card-outer-container {
+  width: 26rem;
+  min-height: 8rem;
+  margin: 10px;
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--font-color);
+}
+.card-inner-container {
+  justify-content: center;
+  gap: 10px;
+}
+.card-title h3 {
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  font-weight: 550;
+  word-wrap: break-word;
+}
+.card-body {
+  margin-bottom: 1rem;
+}
+.card-description {
+  letter-spacing: 1px;
+  font-weight: 500;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  margin-bottom: 2rem;
+}
+.card-btns {
+  justify-content: flex-end;
+
+  gap: 10px;
+}
+.card-btns span {
+  cursor: pointer;
+  color: var(--light-secondary-color);
+}
+.card-btns span:hover {
+  color: var(--font-color);
+}
+.note-card-color {
+  left: 0;
+  gap: 6px;
+}
+
+.chip {
+  border: 1px solid var(--light-secondary-color);
+  border-radius: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 35px;
+  height: 1.2rem;
+  padding: 3px 9px;
+  cursor: default;
+}
+.note-footer {
+  display: inline-flex;
+  justify-content: space-between;
+}
+.card-date {
+  font-size: 1rem;
+}
+.card-outer-container ul li {
+  text-decoration: inherit !important;
+}

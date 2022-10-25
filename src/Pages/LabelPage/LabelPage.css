@@ -1,0 +1,75 @@
+/* * {
+  outline: 1px solid red;
+} */
+.label-container {
+  width: max-content;
+  height: max-content;
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color);
+  color: var(--font-color);
+  border-radius: 8px;
+  padding: 5px;
+  margin: 0rem auto;
+}
+
+.label-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  gap: 4px;
+  border-bottom: 1px solid var(--border-color);
+}
+.label-text {
+  font-size: 1.2rem;
+}
+.label-input-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.label-input-feild {
+  outline: none;
+  border: none;
+  color: var(--font-color);
+  background-color: var(--primary-color);
+  font-size: 1.1rem;
+}
+.add-label-btn {
+  outline: none;
+  border: none;
+  background-color: var(--primary-color);
+  align-self: center;
+  color: var(--font-color);
+  cursor: pointer;
+}
+.label-items-conatiner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 10px;
+  width: 20rem;
+}
+.label-item-icons {
+  align-self: center;
+  align-items: center;
+  gap: 1rem;
+  color: var(--font-color);
+}
+.label-item-text {
+  font-size: 1.1rem;
+  color: var(--font-color);
+}
+.labels-box {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.label-delete-icon {
+  margin-left: auto;
+  cursor: pointer;
+}
