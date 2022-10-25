@@ -15,9 +15,9 @@
 body {
   background-color: var(--primary-color);
 }
-ul li {
+/* ul li {
   list-style: none;
-}
+} */
 .main-wrapper {
   display: grid;
   grid-template-rows: auto 2fr;

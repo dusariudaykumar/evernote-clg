@@ -1,8 +1,13 @@
 import { useNotes } from "../../contexts/notes-context";
 import { CirclePicker } from "react-color";
 import "./NotesField.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LabelModel } from "../index";
+import { useOnClickOutside } from "../../Utils/onClickOutside";
+import ReactTextareaAutosize from "react-textarea-autosize";
+import InputModal from "./InputModal";
+import RichTextEditor from "./RichTextEditor";
+import { ClickAwayListener } from "@mui/material";
 
 const colorsList = [
   "#6F6921",
@@ -22,11 +27,15 @@ const NotesField = ({
   colorPalletHandler,
   colorPickHandler,
 }) => {
-  const { noteBgColor, notesTitle, notesBody } = notes;
+  //bgcolor, title, body
+  console.log(notes, "nn");
+  const { bgcolor, title, body } = notes;
   const {
     noteState: { editNote, isColorPalletVisible },
+    noteDispatch,
   } = useNotes();
   const [showLabelModel, setShowLabelModel] = useState(false);
+  const [open, setOpen] = useState(false);
   const changeHandler = (event) => {
     const { name, value } = event.target;
     setNotes((prev) => ({
@@ -38,87 +47,82 @@ const NotesField = ({
   const expandHandler = () => {
     setIsExpanded(true);
   };
+  const handleNoteBodyChange = (value) => {
+    setNotes((prevNote) => ({ ...prevNote, body: value }));
+  };
 
   return (
-    <>
-      <form
-        style={{ background: noteBgColor }}
-        className="notes-field-wrapper "
-        onSubmit={
-          !editNote
-            ? (event) => addNoteHandler(event, notes)
-            : (e) => updatehandler(e, notes)
-        }>
-        <div className="input-fields flex-col">
-          {isExpanded && (
-            <div className="title-container flex">
-              <input
-                autoComplete="off"
-                type="text"
-                name="notesTitle"
-                className="notes-field-title"
-                placeholder="Title"
-                value={notesTitle}
-                onChange={changeHandler}
-                required
-              />
-              <span className="material-icons-outlined">push_pin</span>
-            </div>
-          )}
-          <div className="notes-body-container">
-            <textarea
-              className="notes-body"
-              name="notesBody"
-              placeholder="Notes....."
-              rows={isExpanded ? 3 : 1}
-              value={notesBody}
+    <ClickAwayListener onClickAway={() => setIsExpanded(false)}>
+      <div className="input-feild-outter-wrapper">
+        <form
+          style={{ background: bgcolor }}
+          className="notes-field-wrapper "
+          onSubmit={
+            !editNote
+              ? (event) => addNoteHandler(event, notes)
+              : (e) => updatehandler(e, notes)
+          }>
+          {!isExpanded && (
+            <input
+              autoComplete="off"
+              type="text"
+              name="title"
+              className="notes-field-title"
+              placeholder="Click here to create notes"
               onClick={expandHandler}
-              onChange={changeHandler}
-              required
             />
-          </div>
+          )}
           {isExpanded && (
-            <div className="flex notes-action">
-              <button className="add-note-btn" type="submit">
-                <span className="material-icons-outlined">
-                  {!editNote ? "add" : "done"}
-                </span>
-              </button>
-
-              <div className="notes-action-btn-wrapper flex">
-                <span
-                  className="material-icons"
-                  onClick={() => colorPalletHandler()}>
-                  palette
-                </span>
-                {isColorPalletVisible && (
-                  <CirclePicker
-                    className="color-palette"
-                    colors={colorsList}
-                    circleSpacing={1}
-                    onChangeComplete={colorPickHandler}
-                  />
-                )}
-                <span className="label-icon">
-                  <span
-                    className="material-icons"
-                    onClick={() => setShowLabelModel((prev) => !prev)}>
-                    label
-                  </span>
-                  {showLabelModel && (
-                    <LabelModel
-                      setNotes={setNotes}
-                      notes={notes}
-                      fromNoteFeild={fromNoteFeild}
-                    />
-                  )}
-                </span>
+            <div className="input-fields flex-col">
+              <div className="title-container flex">
+                <input
+                  autoComplete="off"
+                  type="text"
+                  name="title"
+                  className="notes-field-title"
+                  placeholder="Title"
+                  value={title}
+                  onChange={changeHandler}
+                  required
+                />
+                <span className="material-icons-outlined">push_pin</span>
               </div>
+              <div className="notes-body-container">
+                <RichTextEditor
+                  handleNoteBodyChange={handleNoteBodyChange}
+                  body={body}
+                />
+              </div>
+              {isExpanded && (
+                <div className="flex notes-action">
+                  <button className="add-note-btn" type="submit">
+                    <span className="material-icons-outlined">
+                      {!editNote ? "add" : "done"}
+                    </span>
+                  </button>
+
+                  <div className="notes-action-btn-wrapper flex">
+                    <span
+                      className="material-icons"
+                      onClick={() => colorPalletHandler()}>
+                      palette
+                    </span>
+                    {isColorPalletVisible && (
+                      <CirclePicker
+                        className="color-palette"
+                        colors={colorsList}
+                        circleSpacing={1}
+                        onChangeComplete={colorPickHandler}
+                      />
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           )}
-        </div>
-      </form>
-    </>
+        </form>
+      </div>
+    </ClickAwayListener>
   );
 };
 

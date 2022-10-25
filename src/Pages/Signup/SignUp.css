@@ -1,11 +1,12 @@
 .signup-box {
-  height: 100vh;
+  height: 80vh;
   margin: 3rem;
 }
 
 .form-container {
   align-items: center;
   justify-content: center;
+  padding: 2rem;
 }
 
 .signup-heading {

@@ -32,6 +32,7 @@
   font-weight: 500;
   color: var(--font-color);
   resize: none;
+  margin-bottom: 10px;
 }
 
 .notes-body {
@@ -97,4 +98,41 @@
 .label-icon {
   position: relative;
   display: flex;
+}
+.input-feild-outter-wrapper {
+  position: absolute;
+  top: 7rem;
+  left: 40%;
+  min-width: 30rem;
+  z-index: 2;
+}
+.ql-container.ql-snow,
+.ql-toolbar.ql-snow {
+  border-radius: 5px;
+}
+/* .ql-toolbar .ql-stroke {
+  fill: none !important;
+  stroke: red !important;
+}
+
+.ql-toolbar .ql-fill {
+  fill: #fff !important;
+  stroke: none !important;
+}
+
+.ql-snow .ql-picker {
+  color: #fff !important;
+} */
+.ql-picker-options {
+  background-color: var(--primary-color) !important;
+}
+.ql-editor {
+  color: white;
+}
+.quill > .ql-container > .ql-editor.ql-blank::before {
+  color: #757575;
+}
+
+.ql-picker-item {
+  color: var(--font-color);
 }

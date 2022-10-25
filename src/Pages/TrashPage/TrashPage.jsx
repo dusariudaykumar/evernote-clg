@@ -3,7 +3,11 @@ import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { NotesCard } from "../../Components";
 import { useAuth, useNotes } from "../../contexts";
-import { addNotesService } from "../../services";
+import {
+  addNotesService,
+  deleteFromTrashService,
+  restoreFromTrashService,
+} from "../../services";
 import "./TrashPage.css";
 
 const TrashPage = () => {
@@ -13,23 +17,28 @@ const TrashPage = () => {
   const {
     noteState: { trash },
     noteDispatch,
+    getTrashNotes,
+    getNotes,
   } = useNotes();
-  const deleteFromTrashhandler = (notes) => {
-    const data = trash.filter((note) => note._id !== notes._id);
-    noteDispatch({ type: "DELETE_FROM_TRASH", payload: data });
+  const deleteFromTrashhandler = async (notes) => {
+    const data = await deleteFromTrashService(encodedToken, notes._id);
+    if (data.success) {
+      getTrashNotes();
+    }
     toast.success("Deleted Note From Trash ");
   };
   const restoreFromTrash = async (notes) => {
-    const response = await addNotesService(notes, encodedToken);
-    noteDispatch({
-      type: "ADD_NOTE",
-      payload: response.data.notes,
-    });
-    deleteFromTrashhandler(notes);
+    const data = await restoreFromTrashService(encodedToken, notes._id);
+    if (data.success) {
+      getTrashNotes();
+      getNotes();
+      toast.success("Successfully restored note ");
+    }
   };
   const location = useLocation();
+  console.log(trash);
   return (
-    <div className=" trash-wrapper  ">
+    <div className="trash-wrapper">
       {trash.length > 0 ? (
         trash.map((note) => (
           <NotesCard

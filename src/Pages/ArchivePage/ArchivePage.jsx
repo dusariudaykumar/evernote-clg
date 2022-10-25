@@ -1,8 +1,9 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 import { NotesCard } from "../../Components";
 import { useAuth, useNotes } from "../../contexts/index";
-import { deleteArchiveService, restoreArchiveService } from "../../services";
+import { deleteFromArchiveService, unArchiveService } from "../../services";
 import "./ArchivePage.css";
 const ArchivePage = () => {
   const location = useLocation();
@@ -12,23 +13,26 @@ const ArchivePage = () => {
   const {
     noteState: { archive },
     noteDispatch,
+    getTrashNotes,
+    getAllArchiveNotes,
+    getNotes,
   } = useNotes();
   const unArchiveHandler = async (note) => {
-    const response = await restoreArchiveService(note, encodedToken);
-    noteDispatch({ type: "RESTORE_ARCHIVE", payload: response.data });
-    console.log(response);
+    const data = await unArchiveService(note._id, encodedToken);
+    if (data.succes) {
+      getAllArchiveNotes();
+      getNotes();
+    }
+    toast.success(data.message);
   };
-  const archiveDeleteHandler = async (noteId) => {
-    const response = await deleteArchiveService(noteId, encodedToken);
-    noteDispatch({ type: "ARCHIVE_DELETE", payload: response.data.archives });
-  };
-
-  const archiveTrashHandler = (note) => {
-    noteDispatch({ type: "MOVE_TO_TRASH", payload: note });
-    archive.find(
-      (noteItem) =>
-        noteItem._id === note._id && archiveDeleteHandler(noteItem._id)
-    );
+  const archiveTrashHandler = async (note) => {
+    const data = await deleteFromArchiveService(note._id, encodedToken);
+    console.log(data);
+    if (data.succes) {
+      getTrashNotes();
+      getAllArchiveNotes();
+    }
+    toast.success(data.message);
   };
 
   return (
@@ -39,7 +43,7 @@ const ArchivePage = () => {
             key={note._id}
             notes={note}
             unArchiveHandler={unArchiveHandler}
-            archiveDeleteHandler={archiveDeleteHandler}
+            // archiveDeleteHandler={archiveDeleteHandler}
             archiveTrashHandler={archiveTrashHandler}
             path={location.pathname}
           />

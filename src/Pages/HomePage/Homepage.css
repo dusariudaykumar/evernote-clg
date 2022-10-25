@@ -3,9 +3,14 @@
   grid-row: 2/-1;
 }
 .notecard-container {
-  margin-top: 3rem;
+  margin-top: 6rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+}
+.search-text {
+  font-size: 1.2rem;
+  margin-top: 4rem;
+  color: var(--font-color);
 }

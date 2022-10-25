@@ -1,4 +1,5 @@
 export const noteReducer = (state, action) => {
+  console.log(action, "action1");
   switch (action.type) {
     case "ADD_NOTE":
       return {
@@ -17,29 +18,12 @@ export const noteReducer = (state, action) => {
         notes: [...action.payload],
         editNote: false,
       };
-    case "MOVE_TO_TRASH":
+    case "TRASH_NOTES":
       return {
         ...state,
-        trash: [...state.trash, { ...action.payload }],
+        trash: action.payload,
       };
-    case "DELETE_NOTE":
-      return {
-        ...state,
-        notes: action.payload,
-      };
-    case "ADD_ARCHIVE":
-      return {
-        ...state,
-        notes: action.payload.notes,
-        archive: action.payload.archives,
-      };
-    case "RESTORE_ARCHIVE":
-      return {
-        ...state,
-        notes: action.payload.notes,
-        archive: action.payload.archives,
-      };
-    case "ARCHIVE_DELETE":
+    case "ARCHIVE_NOTES":
       return {
         ...state,
         archive: action.payload,
@@ -54,21 +38,6 @@ export const noteReducer = (state, action) => {
         ...state,
         isNoteColor: !state.isNoteColor,
       };
-    case "DELETE_FROM_TRASH":
-      return {
-        ...state,
-        trash: action.payload,
-      };
-    case "ADD_LABELS":
-      return {
-        ...state,
-        label: [...state.label, action.payload],
-      };
-    case "REMOVE_LABEL":
-      return {
-        ...state,
-        label: action.payload,
-      };
     case "SORT_BY_DATE":
       return {
         ...state,
@@ -79,16 +48,12 @@ export const noteReducer = (state, action) => {
             ? "OLDEST_FIRST"
             : "",
       };
-    case "FILTER_BY_LABEL":
+    case "SEARCH_QUERY": {
       return {
         ...state,
-        filterBy: action.payload,
+        serachQuery: action.payload,
       };
-    case "CLEAR_FILTER":
-      return {
-        ...state,
-        filterBy: "",
-      };
+    }
     default:
       return {
         ...state,

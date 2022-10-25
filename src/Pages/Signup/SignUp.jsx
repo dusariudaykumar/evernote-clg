@@ -1,15 +1,14 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/auth-context";
+import { signUpSevice } from "../../services/AuthSevices/auth";
 import "./SignUp.css";
 const SignUp = () => {
   const navigate = useNavigate();
   const { authDispatch } = useAuth();
   const initailSingUpData = {
     firstName: "",
-    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -22,30 +21,31 @@ const SignUp = () => {
       [name]: value,
     }));
   };
-  const { firstName, lastName, email, password, confirmPassword } = signUpData;
+  const { firstName, email, password, confirmPassword } = signUpData;
   const formDataClickHandler = async (e) => {
     e.preventDefault();
-    try {
-      const authSignUpResponse = await axios.post("/api/auth/signup", {
-        email,
-        password,
-        firstName,
-        lastName,
-      });
-      const { encodedToken, createdUser } = authSignUpResponse.data;
-      if (encodedToken) {
-        authDispatch({
-          type: "SIGNUP_SUCCESS",
-          payload: { createdUser, encodedToken },
-        });
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords must match with Confirm password");
+    } else {
+      try {
+        const { data } = await signUpSevice(firstName, email, password);
+        console.log(data);
+        const { success, token, message, user } = data;
+        if (success) {
+          authDispatch({
+            type: "SIGNUP_SUCCESS",
+            payload: { token, user },
+          });
+        }
+        localStorage.setItem("token", token);
+        localStorage.setItem("userData", JSON.stringify(user));
+        toast.success(message);
+        navigate("/home");
+        setSignUpData(initailSingUpData);
+      } catch (error) {
+        toast.error(error.response.data.message);
       }
-      localStorage.setItem("token", encodedToken);
-      localStorage.setItem("userData", JSON.stringify(createdUser));
-      toast.success("Account created successfuly!");
-      navigate("/home");
-      setSignUpData(initailSingUpData);
-    } catch (error) {
-      toast.error(error.response.data.errors[0]);
     }
   };
 
@@ -55,32 +55,17 @@ const SignUp = () => {
         <h5 className="signup-heading">SignUp</h5>
         <div className="input-container flex-col">
           <div className="flex-col">
-            <label className="signup-labels " htmlFor="first-name-input">
-              First Name
+            <label className="signup-labels " htmlFor="full-name-input">
+              Full Name
             </label>
             <input
               className="input-name sample-input-email"
               type="text"
-              id="first-name-input"
+              id="full-name-input"
               onChange={formDataChangeHandler}
               name="firstName"
               value={firstName}
               placeholder="Enter your First Name"
-              required
-            />
-          </div>
-          <div className="flex-col">
-            <label className="signup-labels " htmlFor="last-name-input">
-              Last Name
-            </label>
-            <input
-              className=" input-last-name sample-input-email"
-              type="text"
-              id="last-name-input"
-              onChange={formDataChangeHandler}
-              name="lastName"
-              value={lastName}
-              placeholder="Enter your Last Name"
               required
             />
           </div>
@@ -90,7 +75,7 @@ const SignUp = () => {
             </label>
             <input
               className=" input-last-name sample-input-email"
-              type="text"
+              type="email"
               id="email-input"
               onChange={formDataChangeHandler}
               name="email"
@@ -120,7 +105,7 @@ const SignUp = () => {
             </label>
             <input
               className="sample-input-pwd"
-              type="Confirm Password"
+              type="password"
               id="confirm-pwd-input"
               onChange={formDataChangeHandler}
               name="confirmPassword"

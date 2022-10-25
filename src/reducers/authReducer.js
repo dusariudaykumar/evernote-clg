@@ -1,18 +1,18 @@
-export const authReducer = (state, action) => {
-  switch (action.type) {
+export const authReducer = (state, { type, payload }) => {
+  switch (type) {
     case "LOGIN_SUCCESS":
       return {
         ...state,
-        isAuth: action.payload.encodedToken ? true : false,
-        userData: action.payload.userData,
-        encodedToken: action.payload.encodedToken,
+        isAuth: payload.token ? true : false,
+        userData: payload.user,
+        encodedToken: payload.token,
       };
     case "SIGNUP_SUCCESS":
       return {
         ...state,
-        isAuth: action.payload.encodedToken ? true : false,
-        userData: action.payload.createdUser,
-        encodedToken: action.payload.encodedToken,
+        isAuth: payload.token ? true : false,
+        userData: payload.user,
+        encodedToken: payload.token,
       };
 
     default:

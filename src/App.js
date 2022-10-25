@@ -3,8 +3,10 @@ import { NavBar, SideNav } from "./Components";
 import { RoutersPath } from "./Routes/RoutersPath";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { useState } from "react";
 function App() {
   const location = useLocation();
+  const [isOpenSideMenu, setIsOpenSideMenu] = useState(false);
   return (
     <div className="App">
       <ToastContainer
@@ -18,10 +20,16 @@ function App() {
         draggable
       />
       <div className="main-wrapper">
-        {location.pathname !== "/" && <NavBar />}
         {location.pathname !== "/login" &&
           location.pathname !== "/signup" &&
-          location.pathname !== "/" && <SideNav />}
+          location.pathname !== "/" && (
+            <NavBar setIsOpenSideMenu={setIsOpenSideMenu} />
+          )}
+        {location.pathname !== "/login" &&
+          location.pathname !== "/signup" &&
+          location.pathname !== "/" && (
+            <SideNav isOpenSideMenu={isOpenSideMenu} />
+          )}
         <RoutersPath />
       </div>
     </div>

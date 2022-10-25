@@ -1,13 +1,12 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/index";
+import { loginService } from "../../services/AuthSevices/auth";
 import "./Login.css";
 
 const Login = () => {
   // initial data of the useState
-
   const initialLoginData = {
     email: "",
     password: "",
@@ -33,30 +32,27 @@ const Login = () => {
   const navigate = useNavigate();
 
   //Login Functionality
-
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
-      const authResp = await axios.post("/api/auth/login", {
-        email: email,
-        password: password,
-      });
-      const { encodedToken, foundUser: userData } = authResp.data;
-      if (encodedToken) {
+      const { data } = await loginService(email, password);
+      console.log(data);
+      const { token, message, success, user } = data;
+      if (success) {
         authDispatch({
           type: "LOGIN_SUCCESS",
-          payload: { userData, encodedToken },
+          payload: { user, token },
         });
-        localStorage.setItem("token", encodedToken);
-        localStorage.setItem("userData", JSON.stringify(userData));
-        toast.success("Login successful!");
+        localStorage.setItem("token", token);
+        localStorage.setItem("userData", JSON.stringify(user));
+        toast.success(message);
         navigate("/home");
       } else {
         navigate("/login");
       }
-      setLoginData(initialLoginData); // clearing the input field
+      setLoginData(initialLoginData);
     } catch (error) {
-      toast.error(error.response.data.errors[0]);
+      toast.error(error.response.data.message);
     }
   };
 

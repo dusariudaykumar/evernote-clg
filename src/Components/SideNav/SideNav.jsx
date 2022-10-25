@@ -1,27 +1,36 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/auth-context";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./SideNav.css";
-const SideNav = () => {
-  const {
-    authState: { userData },
-  } = useAuth();
+const SideNav = ({ isOpenSideMenu }) => {
   const logoutHandler = () => {
     localStorage.clear();
     navigate(0);
   };
   const navigate = useNavigate();
-
+  const { pathname } = useLocation();
   const getActiveStyle = () => ({
     backgroundColor: "#41331c",
   });
-
+  console.log(pathname == "/home");
   return (
-    <div className="side-nav flex-col">
+    <div
+      className={
+        isOpenSideMenu
+          ? ` side-nav flex-col toggle-width`
+          : `side-nav flex-col expanded-menu`
+      }>
       <ul className="nav-items">
-        <li className="nav-pill">
-          <NavLink className="nav-pill" to="/home">
-            <div className="flex nav-icon-container">
+        <li>
+          <NavLink to="/home">
+            <div
+              style={{
+                backgroundColor: pathname === "/home" ? "#41331c" : "#202124",
+              }}
+              className={
+                isOpenSideMenu
+                  ? `flex nav-icon-container toggled-expanded-menu`
+                  : `flex nav-icon-container toggled-closed-menu`
+              }>
               <span className="material-icons-outlined side-nav-icon ">
                 home
               </span>
@@ -29,19 +38,40 @@ const SideNav = () => {
             </div>
           </NavLink>
         </li>
-        <li className="nav-pill">
-          <NavLink style={getActiveStyle} to="/label">
-            <div className="flex nav-icon-container">
+        {/* <li>
+          <NavLink
+            to="/label"
+            className={isOpenSideMenu ? `toggle-menu` : `nav-pill`}>
+            <div
+              style={{
+                backgroundColor: pathname === "/label" ? "#41331c" : "#202124",
+              }}
+              className={
+                isOpenSideMenu
+                  ? `flex nav-icon-container toggled-expanded-menu`
+                  : `flex nav-icon-container toggled-closed-menu`
+              }>
               <span className="material-icons-outlined side-nav-icon">
                 label
               </span>
               <span>Label</span>
             </div>
           </NavLink>
-        </li>
-        <li className="nav-pill">
-          <NavLink style={getActiveStyle} to="/archive">
-            <div className="flex nav-icon-container">
+        </li> */}
+        <li>
+          <NavLink
+            to="/archive"
+            className={isOpenSideMenu ? `toggle-menu` : `nav-pill`}>
+            <div
+              style={{
+                backgroundColor:
+                  pathname === "/archive" ? "#41331c" : "#202124",
+              }}
+              className={
+                isOpenSideMenu
+                  ? `flex nav-icon-container toggled-expanded-menu`
+                  : `flex nav-icon-container toggled-closed-menu`
+              }>
               <span className="material-icons-outlined side-nav-icon">
                 archive
               </span>
@@ -49,9 +79,19 @@ const SideNav = () => {
             </div>
           </NavLink>
         </li>
-        <li className="nav-pill">
-          <NavLink style={getActiveStyle} to="/trash">
-            <div className="flex nav-icon-container">
+        <li>
+          <NavLink
+            to="/trash"
+            className={isOpenSideMenu ? `toggle-menu` : `nav-pill`}>
+            <div
+              style={{
+                backgroundColor: pathname === "/trash" ? "#41331c" : "#202124",
+              }}
+              className={
+                isOpenSideMenu
+                  ? `flex nav-icon-container toggled-expanded-menu`
+                  : `flex nav-icon-container toggled-closed-menu`
+              }>
               <span className="material-icons-outlined side-nav-icon">
                 delete
               </span>
@@ -60,13 +100,19 @@ const SideNav = () => {
           </NavLink>
         </li>
       </ul>
-      <div className="logout-container flex">
-        <div className="user-name">
-          {userData.firstName + " " + userData.lastName}
-        </div>
-        <span className="material-icons side-nav-icon" onClick={logoutHandler}>
+      <div
+        className={
+          isOpenSideMenu
+            ? `flex nav-icon-container toggled-expanded-menu`
+            : `flex nav-icon-container toggled-closed-menu`
+        }>
+        {/* {!isOpenSideMenu && <div className="user-name">{userData.name}</div>} */}
+        <span
+          className="material-icons side-nav-icon logout-icon"
+          onClick={logoutHandler}>
           logout
         </span>
+        <span className="logout">Logout</span>
       </div>
     </div>
   );

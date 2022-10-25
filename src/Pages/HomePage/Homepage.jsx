@@ -3,53 +3,52 @@ import { toast } from "react-toastify";
 import { NotesCard, NotesField } from "../../Components";
 import { useAuth, useNotes } from "../../contexts";
 import {
-  addArchiveService,
   addNotesService,
+  addToArchiveNotesService,
   deleteNotesService,
   editNotesService,
 } from "../../services";
-import { FilterByLabel, SortByDateTime } from "../../Utils/index";
+
+import { searchNotes, SortByDateTime } from "../../Utils/index";
 import "./Homepage.css";
 
 const initialNotes = {
-  notesTitle: "",
-  notesBody: "",
-  noteBgColor: "",
-  label: "",
+  title: "",
+  body: "",
+  bgcolor: "",
   editedAt: "",
 };
 const Homepage = () => {
   const {
     authState: { encodedToken },
   } = useAuth();
-  const { noteState, noteDispatch } = useNotes();
+  const {
+    noteState,
+    noteDispatch,
+    getNotes,
+    getAllArchiveNotes,
+    getTrashNotes,
+  } = useNotes();
   const [notes, setNotes] = useState(initialNotes);
   const [isExpanded, setIsExpanded] = useState(false);
-
   const editHandler = (noteedit) => {
+    console.log(noteedit, "qq");
     setNotes({
       ...notes,
       _id: noteedit._id,
-      notesTitle: noteedit.notesTitle,
-      notesBody: noteedit.notesBody,
-      noteBgColor: noteedit.noteBgColor,
-      label: noteedit.label,
-      editedAt: new Date(),
+      title: noteedit.title,
+      body: noteedit.body,
+      bgcolor: noteedit.bgcolor,
     });
     noteDispatch({ type: "EDIT_NOTE" });
     setIsExpanded(true);
   };
   const addNoteHandler = async (event, note) => {
     event.preventDefault();
-    const response = await addNotesService(
-      { ...note, editedAt: new Date() },
-      encodedToken
-    );
-    noteDispatch({
-      type: "ADD_NOTE",
-      payload: response.data.notes,
-    });
-
+    const { data } = await addNotesService(note, encodedToken);
+    if (data.success) {
+      getNotes();
+    }
     toast.success("Created new note");
     setNotes(initialNotes);
     setIsExpanded(false);
@@ -57,31 +56,28 @@ const Homepage = () => {
 
   const updatehandler = async (e, editnotes) => {
     e.preventDefault();
-    const resp = await editNotesService(editnotes, encodedToken);
-    noteDispatch({
-      type: "UPDATE_NOTE",
-      payload: resp.data.notes,
-    });
+    const { data } = await editNotesService(editnotes, encodedToken);
+    if (data.success) {
+      getNotes();
+    }
     setNotes(initialNotes);
     setIsExpanded(false);
   };
-  const deleteNoteHandler = async (notesId) => {
-    const resp = await deleteNotesService(notesId, encodedToken);
-    noteDispatch({
-      type: "DELETE_NOTE",
-      payload: resp.data.notes,
-    });
-  };
-  const trashNoteHandler = async (note) => {
-    noteDispatch({ type: "MOVE_TO_TRASH", payload: note });
-    noteState.notes.find(
-      (noteItem) => noteItem._id === note._id && deleteNoteHandler(noteItem._id)
-    );
+
+  const trashNoteHandler = async (notesId) => {
+    const data = await deleteNotesService(notesId, encodedToken);
+    if (data.success) {
+      getNotes();
+      getTrashNotes();
+    }
   };
 
   const addArchiveHandler = async (note) => {
-    const response = await addArchiveService(note, encodedToken);
-    noteDispatch({ type: "ADD_ARCHIVE", payload: response.data });
+    const data = await addToArchiveNotesService(note._id, encodedToken);
+    if (data.success) {
+      getNotes();
+      getAllArchiveNotes();
+    }
   };
 
   const colorPalletHandler = () => {
@@ -91,12 +87,11 @@ const Homepage = () => {
     noteDispatch({ type: "COLOR_PALLET_VISIBLE" });
     setNotes((prev) => ({
       ...prev,
-      noteBgColor: color.hex,
+      bgcolor: color.hex,
     }));
   };
-  const filterData = FilterByLabel(noteState.notes, noteState.filterBy);
-
-  const sortedNotes = SortByDateTime(filterData, noteState.sortBy);
+  const sortedNotes = SortByDateTime(noteState.notes, noteState.sortBy);
+  const searchedNotes = searchNotes(noteState.serachQuery, sortedNotes);
 
   return (
     <div className="home-page-wrapper">
@@ -110,17 +105,35 @@ const Homepage = () => {
         colorPalletHandler={colorPalletHandler}
         colorPickHandler={colorPickHandler}
       />
-      <div className=" notecard-container ">
-        {sortedNotes.map((item) => (
-          <NotesCard
-            key={item._id}
-            notes={item}
-            editHandler={editHandler}
-            trashNoteHandler={trashNoteHandler}
-            addArchiveHandler={addArchiveHandler}
-          />
-        ))}
-      </div>
+      <article className=" notecard-container ">
+        {noteState.serachQuery.length > 1 ? (
+          searchedNotes.length !== 0 ? (
+            searchedNotes.map((item) => (
+              <NotesCard
+                key={item._id}
+                notes={item}
+                editHandler={editHandler}
+                trashNoteHandler={trashNoteHandler}
+                addArchiveHandler={addArchiveHandler}
+                path="home"
+              />
+            ))
+          ) : (
+            <div className="search-text">You don't have any notes!</div>
+          )
+        ) : (
+          sortedNotes.map((item) => (
+            <NotesCard
+              key={item._id}
+              notes={item}
+              editHandler={editHandler}
+              trashNoteHandler={trashNoteHandler}
+              addArchiveHandler={addArchiveHandler}
+              path="home"
+            />
+          ))
+        )}
+      </article>
     </div>
   );
 };

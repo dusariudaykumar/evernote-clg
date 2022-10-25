@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { DateTime } from "../../Utils/DateTime";
-import { LabelModel } from "../index";
+import parse from "html-react-parser";
 import "./NotesCard.css";
 
 const NotesCard = ({
@@ -14,28 +14,21 @@ const NotesCard = ({
   restoreFromTrash,
   archiveTrashHandler,
 }) => {
-  const { notesTitle, notesBody, _id, noteBgColor, label, editedAt } = notes;
-  const fromNoteFeild = false;
+  const { title, body, _id, bgcolor, updatedAt } = notes;
   const [showIcons, setShowIcons] = useState(false);
-  const date = DateTime(editedAt);
-  const [showLabelModel, setShowLabelModel] = useState(false);
+  const date = DateTime(updatedAt);
   return (
     <div
-      style={{ background: noteBgColor }}
+      style={{ background: bgcolor }}
       className="card-outer-container "
       onMouseEnter={() => setShowIcons(true)}
       onMouseLeave={() => setShowIcons(false)}>
       <div className="card-inner-container flex-col">
         <div className="card-title">
-          <h3>{notesTitle}</h3>
+          <h3>{title}</h3>
         </div>
         <div className="card-body">
-          <p className="card-description">{notesBody}</p>
-          {label && (
-            <div className="chip-container">
-              <span className="chip">{label}</span>
-            </div>
-          )}
+          <article className="card-description">{parse(body)}</article>
         </div>
 
         <div className="note-footer">
@@ -45,25 +38,13 @@ const NotesCard = ({
             style={{ visibility: showIcons ? "visible" : "hidden" }}>
             {path !== "/trash" ? (
               <>
-                <span
-                  className="material-icons-outlined"
-                  onClick={() => editHandler({ ...notes, _id: _id })}>
-                  edit
-                </span>
-                <span className="label-icon">
+                {path === "home" && (
                   <span
-                    className="material-icons"
-                    onClick={() => setShowLabelModel((prev) => !prev)}>
-                    label
+                    className="material-icons-outlined"
+                    onClick={() => editHandler({ ...notes, _id: _id })}>
+                    edit
                   </span>
-                  {showLabelModel && (
-                    <LabelModel
-                      notes={notes}
-                      fromNoteFeild={fromNoteFeild}
-                      setShowLabelModel={setShowLabelModel}
-                    />
-                  )}
-                </span>
+                )}
                 {path !== "/archive" ? (
                   <span
                     className="material-icons"
@@ -81,7 +62,7 @@ const NotesCard = ({
                   className="material-icons"
                   onClick={
                     path !== "/archive"
-                      ? () => trashNoteHandler(notes)
+                      ? () => trashNoteHandler(notes._id)
                       : () => archiveTrashHandler(notes)
                   }>
                   delete

@@ -63,3 +63,6 @@
 .card-date {
   font-size: 1rem;
 }
+.card-outer-container ul li {
+  text-decoration: inherit !important;
+}
