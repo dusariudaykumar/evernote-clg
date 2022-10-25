@@ -1,4 +1,4 @@
-<h1 align="center">Notes App</h1>
+<h1 align="center">EverNote App</h1>
 <p align="center"> <b> Collect Your Thoughts .</b></p>
 <p align="center">Take notes the simple way for free. Forever </>
 
