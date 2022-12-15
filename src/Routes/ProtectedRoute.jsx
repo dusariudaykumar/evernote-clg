@@ -7,7 +7,7 @@ const ProtectedRoute = () => {
     authState: { isAuth },
   } = useAuth();
 
-  return false ? (
+  return isAuth === true ? (
     <Outlet />
   ) : (
     <Navigate to="/login" state={{ from: location.pathname }} replace />
