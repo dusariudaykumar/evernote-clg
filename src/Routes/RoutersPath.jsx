@@ -1,10 +1,8 @@
-import Mockman from "mockman-js";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import {
   ArchivePage,
   Homepage,
-  LabelPage,
   LandingPage,
   Login,
   SignUp,
@@ -18,12 +16,10 @@ const RoutersPath = () => {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/mockman" element={<Mockman />} />
-      <Route element={<ProtectedRoute />}>
+      <Route path="/" element={<ProtectedRoute />}>
         <Route path="/home" element={<Homepage />} />
         <Route path="/archive" element={<ArchivePage />} />
         <Route path="/trash" element={<TrashPage />} />
-        <Route path="/label" element={<LabelPage />} />
       </Route>
     </Routes>
   );

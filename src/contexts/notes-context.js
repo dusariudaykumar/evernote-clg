@@ -31,16 +31,17 @@ const NotesProvider = ({ children }) => {
   };
   const getAllArchiveNotes = async () => {
     const data = await getAllArchiveNotesService(encodedToken);
-    console.log(data);
     if (data.success) {
       noteDispatch({ type: "ARCHIVE_NOTES", payload: data.archive });
     }
   };
   useEffect(() => {
-    getNotes();
-    getTrashNotes();
-    getAllArchiveNotes();
-  }, []);
+    if (encodedToken) {
+      getNotes();
+      getTrashNotes();
+      getAllArchiveNotes();
+    }
+  }, [encodedToken]);
   return (
     <NotesContext.Provider
       value={{

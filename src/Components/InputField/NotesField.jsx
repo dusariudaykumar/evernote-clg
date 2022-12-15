@@ -27,8 +27,6 @@ const NotesField = ({
   colorPalletHandler,
   colorPickHandler,
 }) => {
-  //bgcolor, title, body
-  console.log(notes, "nn");
   const { bgcolor, title, body } = notes;
   const {
     noteState: { editNote, isColorPalletVisible },

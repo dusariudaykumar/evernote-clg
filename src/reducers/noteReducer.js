@@ -1,5 +1,4 @@
 export const noteReducer = (state, action) => {
-  console.log(action, "action1");
   switch (action.type) {
     case "ADD_NOTE":
       return {

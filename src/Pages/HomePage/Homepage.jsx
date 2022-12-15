@@ -32,7 +32,6 @@ const Homepage = () => {
   const [notes, setNotes] = useState(initialNotes);
   const [isExpanded, setIsExpanded] = useState(false);
   const editHandler = (noteedit) => {
-    console.log(noteedit, "qq");
     setNotes({
       ...notes,
       _id: noteedit._id,

@@ -27,7 +27,6 @@ const ArchivePage = () => {
   };
   const archiveTrashHandler = async (note) => {
     const data = await deleteFromArchiveService(note._id, encodedToken);
-    console.log(data);
     if (data.succes) {
       getTrashNotes();
       getAllArchiveNotes();
