@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 const NOTES_BASE_URL = process.env.REACT_APP_NOTES_APP_BASE_URL;
 export const addNotesService = (note, encodedToken) => {
   const { title, body, bgcolor } = note;
-  console.log(encodedToken);
   try {
     const res = axios.post(
       `${NOTES_BASE_URL}/notes/create`,
@@ -46,7 +45,6 @@ export const editNotesService = async (editnotes, encodedToken) => {
       }
     );
     toast.info("Edited Notes");
-    console.log(resp, "resp");
     return resp;
   } catch (error) {
     console.log(error.response);
@@ -54,7 +52,6 @@ export const editNotesService = async (editnotes, encodedToken) => {
 };
 
 export const deleteNotesService = async (notesId, encodedToken) => {
-  console.log(notesId);
   try {
     const { data } = await axios.delete(`${NOTES_BASE_URL}/notes/${notesId}`, {
       headers: { authorization: encodedToken },

@@ -36,7 +36,6 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await loginService(email, password);
-      console.log(data);
       const { token, message, success, user } = data;
       if (success) {
         authDispatch({

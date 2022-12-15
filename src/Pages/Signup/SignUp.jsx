@@ -30,7 +30,6 @@ const SignUp = () => {
     } else {
       try {
         const { data } = await signUpSevice(firstName, email, password);
-        console.log(data);
         const { success, token, message, user } = data;
         if (success) {
           authDispatch({

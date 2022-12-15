@@ -1,18 +1,27 @@
 import React from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts";
 import "./SideNav.css";
 const SideNav = ({ isOpenSideMenu }) => {
+  const { authDispatch } = useAuth();
   const logoutHandler = () => {
     localStorage.clear();
-    navigate(0);
+    authDispatch({
+      type: "LOGOUT_SUCCESS",
+      paylod: {
+        isAuth: false,
+        encodedToken: "",
+        userData: "",
+      },
+    });
     navigate("/login");
+    navigate(0);
   };
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const getActiveStyle = () => ({
     backgroundColor: "#41331c",
   });
-  console.log(pathname == "/home");
   return (
     <div
       className={

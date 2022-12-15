@@ -36,7 +36,6 @@ const TrashPage = () => {
     }
   };
   const location = useLocation();
-  console.log(trash);
   return (
     <div className="trash-wrapper">
       {trash.length > 0 ? (

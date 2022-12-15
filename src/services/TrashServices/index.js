@@ -7,7 +7,6 @@ export const getAllTrashNotes = async (encodedToken) => {
         authorization: encodedToken,
       },
     });
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error.response);
@@ -25,7 +24,6 @@ export const deleteFromTrashService = async (encodedToken, noteId) => {
       }
     );
 
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error.response);
@@ -43,7 +41,6 @@ export const restoreFromTrashService = async (encodedToken, noteId) => {
       }
     );
 
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error.response);
