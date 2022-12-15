@@ -5,6 +5,7 @@ const SideNav = ({ isOpenSideMenu }) => {
   const logoutHandler = () => {
     localStorage.clear();
     navigate(0);
+    navigate("/login");
   };
   const navigate = useNavigate();
   const { pathname } = useLocation();
